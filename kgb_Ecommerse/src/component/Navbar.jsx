@@ -28,7 +28,7 @@ const Navbar = () => {
       <nav
         className={`absolute md:static w-full md:w-auto bg-[#fae9e6] transition-all duration-300 ease-in-out ${
           isOpen ? "top-14" : "top-[-300px]"
-        } md:top-0 md:block md:flex md:items-center md:p-0`}
+        } md:top-0 md:block md:items-center md:p-0`}
       >
         <ul className="flex flex-col md:flex-row gap-3 justify-center items-center p-4 md:p-0">
           <li>
