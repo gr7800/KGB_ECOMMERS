@@ -1,8 +1,11 @@
+import { AllRoutes } from './AllRoutes/AllRoutes'
 import './App.css'
 
 function App() {
 
   return (
+<>
+     k-fixes
     <h1 className="text-3xl font-bold underline">
     Hello world!
     <div className='bg-light-pink-1 h-64'>
@@ -15,6 +18,9 @@ function App() {
       hi
     </div>
   </h1>
+    <AllRoutes />
+</>
+   
   )
 }
 

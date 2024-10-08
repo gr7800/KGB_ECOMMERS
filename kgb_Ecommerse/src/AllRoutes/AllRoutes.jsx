@@ -1,34 +1,42 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {
-  fetchData,
-  handleCartFetch,
-  handleSingleBlogFetch,
-} from "../utils/helper";
-import { BaseBlogUrl, BaseUrlProduct } from "../utils/constant";
+import HomePage from "../pages/HomePage";
+import ProductPage from "../pages/ProductPage";
+import Cart from "../pages/Cart";
+import Blog from "../pages/Blog";
 import SingleBlog from "../pages/SingleBlog";
-import NotFoundPage from "../pages/NotFoundPage";
-import ProductPage from "../pages/Products";
+import Contact from "../pages/Contact";
+import SingleProductPage from "../pages/SingleProductPage";
+import NotFoundPage from "../component/NotFoundPage";
+import Profile from "../pages/Profile";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import HomeWrapper from "../component/HomeWrapper";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeWrapper/>,
+    element: <HomeWrapper />,
     children: [
       {
         index: true,
-        element: <Home />,
-        loader: () => fetchData(`${BaseUrlProduct}?limit=4`),
+        element: <HomePage />,
       },
       {
         path: "/products",
-        element: <ProductPage/>,
-        loader: () => fetchData(BaseUrlProduct),
+        children: [
+          {
+            index: true,
+            element: <ProductPage />,
+          },
+          {
+            path: ":id",
+            element: <SingleProductPage />,
+          },
+        ],
       },
       {
         path: "/cart",
-        element: <Cart errorOnCurrencyChange={false}/>,
-        loader: handleCartFetch,
-        errorElement: <Cart errorOnCurrencyChange={true}/>,
+        element: <Cart />,
       },
       {
         path: "/blog",
@@ -36,14 +44,28 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Blog />,
-            loader: () => fetchData(BaseBlogUrl),
           },
           {
             path: ":id",
             element: <SingleBlog />,
-            loader: handleSingleBlogFetch,
           },
         ],
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/profle",
+        element: <Profile />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },
