@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const HomeWrapper = () => {
   return (
-    <div className="relative pb-[300px] min-h-screen">
+    <div className="relative min-h-screen">
       <Navbar/>
       <Outlet />
       <Footer />
