@@ -1,5 +1,5 @@
 import React from "react";
-import notfound from "../assets/notfound.avif"
+import pageNotFound from "../assets/pageNotFound.jpg";
 
 const NotFoundPage = () => {
   return (
