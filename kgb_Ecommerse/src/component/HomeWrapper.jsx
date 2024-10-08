@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const HomeWrapper = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <Navbar />
       <Outlet />
       <Footer />

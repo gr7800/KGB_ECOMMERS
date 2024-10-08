@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const NotFoundPage = () => {
   return (
-    <div className="w-full min-h-screen flex items-center flex-col">
+    <div className="min-h-screen relative">
       <Navbar />
       <img
         src={pageNotFound}
