@@ -4,17 +4,26 @@ Reference Ecommerce:
 Live Link: https://booklet-c1aa8.web.app/
 Github Link: https://github.com/khushijohri2001/booket
 
+
+Theme:
+
+light pink : #fae9e6
+light rose: #eec6c6
+dark rose: bg-rose-900 
+
+
+
 Team Members :
 
 Guddu:
 Folder structure
+Routing
 Redux Toolkit, thunk setup  => Slices (Products, blogs, auth)
 Carousel
 Header - active nav link, logo, currency 
 
 
 Khushi:
-Routing
 
 Home page
 Product Listing

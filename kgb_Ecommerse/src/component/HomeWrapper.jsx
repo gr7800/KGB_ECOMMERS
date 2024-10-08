@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const HomeWrapper = () => {
   return (
-    <div className="relative pb-[300px] min-h-screen">
-      <Header/>
+    <div className="min-h-screen relative">
+      <Navbar />
       <Outlet />
       <Footer />
     </div>
@@ -14,3 +14,4 @@ const HomeWrapper = () => {
 };
 
 export default HomeWrapper;
+("");

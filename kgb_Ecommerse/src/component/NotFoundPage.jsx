@@ -1,14 +1,18 @@
 import React from "react";
-import notfound from "../assets/notfound.avif"
+import pageNotFound from "../assets/pageNotFound.jpg";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const NotFoundPage = () => {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="min-h-screen relative">
+      <Navbar />
       <img
-        src={notfound}
+        src={pageNotFound}
         alt="404 not found!"
         className="w-full h-full object-contain"
       />
+      <Footer />
     </div>
   );
 };

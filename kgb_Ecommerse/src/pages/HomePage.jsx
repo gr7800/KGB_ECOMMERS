@@ -1,8 +1,12 @@
 import React from 'react'
+import Carousel from '../component/Carousel'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div className="bg-[url('./assets/glitter-background.png')] bg-cover bg-fixed">
+      <Carousel/>
+      
+    </div>
   )
 }
 
