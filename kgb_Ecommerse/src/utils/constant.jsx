@@ -3,6 +3,7 @@ export const BaseBlogUrl = 'https://jsonplaceholder.typicode.com/posts';
 export const CurrencyChangeUrl = 'https://anyapi.io/api/v1/exchange/convert';
 export const ApiKey = 'cgeolhbqhooa1j0mok4k6gcn0ut8rkt98p58ebufe6ngg3becm4fero';
 
+
 export const OptionOfCarrencyExchange =  [
     { id: 1, name: "United States", value: "USD" },
     { id: 2, name: "India", value: "INR" },
@@ -17,3 +18,12 @@ export const OptionOfCarrencyExchange =  [
     { id: 11, name: "South Africa", value: "ZAR" },
     { id: 12, name: "Singapore", value: "SGD" }
 ];
+
+
+import crousel1 from "../assets/crousel1.gif"
+import crousel2 from "../assets/crousel2.webp"
+import crousel3 from "../assets/crousel3.gif"
+import crousel4 from "../assets/crousel4.gif"
+import crousel5 from "../assets/crousel5.gif"
+
+export const crouseLImages = [crousel1,crousel2,crousel3,crousel5,crousel4]

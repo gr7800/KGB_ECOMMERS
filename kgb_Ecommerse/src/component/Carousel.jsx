@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Carousel = ({
-  images = [],
+  data = [],
   autoSlide = false,
   autoSlideInterval = 10000,
 }) => {
@@ -10,12 +10,12 @@ const Carousel = ({
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? data.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === images.length - 1;
+    const isLastSlide = currentIndex === data.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -26,15 +26,15 @@ const Carousel = ({
     return () => clearInterval(slideInterval);
   }, [currentIndex, autoSlide, autoSlideInterval]);
 
-  if (images.length == 0) {
+  if (data.length == 0) {
     return "...Loading";
   }
 
   return (
     <div className="relative w-full h-[70vh]">
-      <div className="absolute translate-x-0 inset-0 transition-transform ease-out delay-500  h-[70vh] w-full flex justify-center items-center overflow-hidden border-2 border-gray-300 shadow-lg shadow-black">
+      <div className="absolute translate-x-0 inset-0 transition-transform ease-out delay-500  h-[70vh] w-full flex justify-center items-center overflow-hidden shadow-sm border-1 shadow-[#fa7fab] border-[#fa7fab] rounded-2xl">
         <img
-          src={images[currentIndex]?.urls.full}
+          src={data[currentIndex]}
           alt="Carousel Image"
           className={`w-full h-[70vh] object-cover rounded-lg`}
         />
@@ -54,7 +54,7 @@ const Carousel = ({
       </div>
 
       <div className="absolute bottom-4 w-full flex justify-center space-x-2">
-        {images.map((_, index) => (
+        {data.map((_, index) => (
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
