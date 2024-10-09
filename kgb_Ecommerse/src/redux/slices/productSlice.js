@@ -1,20 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  fetchProductByIdApi,
+  fetchProductsApi,
+} from "../../ApiService/ProductService";
 
 const fetchProducts = createAsyncThunk("products/fetchProducts", async () => {
-  const response = await fetch("https://fakestoreapi.com/products");
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
-  }
-  return response.json();
+  return fetchProductsApi();
 });
 
-const fetchProductById = createAsyncThunk("products/fetchProductById",
+const fetchProductById = createAsyncThunk(
+  "products/fetchProductById",
   async (id) => {
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch product");
-    }
-    return response.json();
+    return fetchProductByIdApi(id);
   }
 );
 
