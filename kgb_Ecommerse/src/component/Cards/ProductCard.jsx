@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { AddToCartButton, RemoveFromCartButton } from '../Buttons'
 
 const ProductCard = () => {
+
     return (
+        <Link to="/products/1">
         <div
-            className="flex flex-col bg-rose-300 w-64 h-auto relative font-serif p-4 rounded-sm cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition"
+            className="flex flex-col bg-rose-300 w-64 h-auto relative font-serif p-4 rounded cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition"
         >
 
             <img
@@ -23,20 +27,14 @@ const ProductCard = () => {
 
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-3">
                 <p className="">₹ Product Price</p>
             </div>
 
-            <div>
-                <p className="py-2 text-rose-900 font-semibold text-sm">
-                    200
-                </p>
-            </div>
-
-            <div>
-                Add to cart
-            </div>
+            <AddToCartButton/>
+            <RemoveFromCartButton/>
         </div>
+        </Link>
     )
 }
 
