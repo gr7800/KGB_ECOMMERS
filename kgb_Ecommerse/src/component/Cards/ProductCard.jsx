@@ -7,7 +7,7 @@ const ProductCard = () => {
     return (
         <Link to="/products/1">
         <div
-            className="flex flex-col bg-rose-300 w-64 h-auto relative font-serif p-4 rounded cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition"
+            className="flex flex-col bg-rose-300 w-64 h-auto relative font-serif p-4 rounded cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition shadow-2xl"
         >
 
             <img
