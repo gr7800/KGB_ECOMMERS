@@ -18,9 +18,11 @@ Team Members :
 
 Guddu:
 Folder structure
-Redux Toolkit, thunk setup  => Slices (Products, blogs,cart, auth)
+Redux Toolkit, thunk setup  => Slices (Products, blogs,cart, auth,currency)
 Carousel
 Header - active nav link, logo,
+footer
+HomePage
 
 Todo:
 Carousel
