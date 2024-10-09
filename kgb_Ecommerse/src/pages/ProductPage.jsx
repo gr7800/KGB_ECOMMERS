@@ -10,8 +10,6 @@ const ProductPage = () => {
   useEffect(() => {
     dispatch( fetchProducts())
   }, [])
-
-  console.log(products);
   
   
   return (
