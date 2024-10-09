@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full bg-[#fae9e6] flex justify-between items-center px-5 py-3 shadow-md relative text-[#fa7fab] font-semibold">
+    <div className="w-full bg-[#fae9e6] flex justify-between items-center px-5 py-3 shadow-md fixed top-0 z-10 text-[#fa7fab] font-semibold">
       <Link to="/" className="flex items-center">
         <img
           src={logo}
