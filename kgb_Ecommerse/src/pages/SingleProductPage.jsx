@@ -1,36 +1,49 @@
-import React from 'react'
+import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import { useEffect } from "react";
+import { fetchProductById } from "../redux/slices/productSlice";
+import { FaStar } from "react-icons/fa";
 
 const SingleProductPage = () => {
+  const {productId} = useParams();
+  const {singleProduct} = useSelector((state) => state.product)
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProductById(productId))
+  }, [])
+
+  const {id, title, category, image, description, price, rating} = singleProduct !== null && singleProduct
+  const {rate} = rating && rating
+  
+  
+
   return (
     <div className="py-16 px-36 bg-light-rose w-full max-sm:px-4 max-lg:px-16 max-lg:py-8">
       <div className="flex justify-evenly gap-1 max-sm:flex-col max-sm:items-center max-sm:gap-8 max-lg:gap-10">
         <div className="w-full max-sm:w-auto">
           <img
-            src="https://avatars.githubusercontent.com/u/4058273?v=4"
-            alt="pic"
+            src={image}
+            alt={title}
             className="border-2 border-white h-[34rem] w-[34rem] object-cover max-sm:w-64 max-sm:h-64 max-lg:h-[28rem] max-lg:w-[28rem]"
           />
         </div>
 
         <div className="w-3/4 flex flex-col gap-6 font-sans">
           <div>
-            <p className="text-sm font-extralight">Category</p>
-            <h1 className="text-3xl font-julius font-extrabold">Name</h1>
+            <p className="text-sm font-extralight capitalize">{category}</p>
+            <h1 className="text-3xl font-julius font-extrabold">{title}</h1>
             <div className="flex gap-1 items-center justify-start pt-3">
-              {/* {[...Array(rating)].map((star, index) => (
-                <i
-                  key={index}
-                  className="fa-solid fa-star text-xs text-rose-900"
-                ></i>
-              ))} */}
-              Rating
+            {[...Array(Math.round(rate))].map((star, index) => (
+                <FaStar className="text-rose-900" />
+              ))}
             </div>
           </div>
 
           <div>
             <div className="text-xl font-julius font-extrabold flex items-center gap-2">
-              <p>₹ Price</p>
-              {/* <p className="line-through text-zinc-700">₹{originalPrice}</p> */}
+              <p>₹ {price}</p>
             </div>
             <p className="text-sm font-extralight">Tax Included</p>
           </div>
@@ -58,7 +71,7 @@ const SingleProductPage = () => {
           </div>
 
           <div className="mt-2">
-            <p>Description</p>
+            <p>{description}</p>
           </div>
 
           <div>
