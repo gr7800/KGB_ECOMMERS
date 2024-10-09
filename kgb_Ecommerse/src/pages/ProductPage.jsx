@@ -3,6 +3,7 @@ import ProductCard from '../component/Cards/ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../redux/slices/productSlice'
 
+
 const ProductPage = () => {
   const {products} = useSelector((state) => state.product)
   const dispatch = useDispatch();
@@ -20,8 +21,17 @@ const ProductPage = () => {
     }
     
    </div>
+
+    <div>
+      <div className='flex justify-end'>
+      <Pagination pageCount ={10} gotoPage={gotoPage} page={page} /> 
+      </div>
+    </div>
+
   </section>
+
   )
 }
+
 
 export default ProductPage
