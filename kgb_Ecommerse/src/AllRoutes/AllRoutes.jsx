@@ -12,6 +12,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import HomeWrapper from "../component/HomeWrapper";
 import Register from "../pages/Register";
+import ResetPasword from "../pages/ResetPasword";
+import ContactUs from "../pages/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPasword />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },
