@@ -12,6 +12,9 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import HomeWrapper from "../component/HomeWrapper";
 import Register from "../pages/Register";
+import ResetPasword from "../pages/ResetPasword";
+import ContactUs from "../pages/ContactUs";
+import IsUserExists from "../component/HOC/IsUserExists";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element:<IsUserExists>  <Cart /></IsUserExists>,
       },
       {
         path: "/blog",
@@ -71,6 +74,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPasword />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
       },
     ],
   },
