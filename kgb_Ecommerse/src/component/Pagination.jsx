@@ -5,7 +5,7 @@ function Button2({ content, onClick, active, disabled }) {
   return (
     <button
       className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-[0_4px_10px_rgba(0,0,0,0.03)] text-lg font-normal transition-colors rounded-lg
-      ${active ? "bg-rose-400 text-white" : "text-rose-400"}
+      ${active ? "bg-rose-300 text-white" : "text-[#ff006c]"}
       ${
         !disabled
           ? "bg-white hover:bg-rose-500 hover:text-white"
@@ -93,8 +93,8 @@ function Pagination({pageCount, gotoPage, page}) {
     <div className="flex gap-3 flex-wrap p-6 py-12">
       <PaginationNav1
         gotoPage={gotoPage}
-        canPreviousPage={pageIndex > 0}
-        canNextPage={pageIndex < pageCount - 1}
+        canPreviousPage={page > 0}
+        canNextPage={page < pageCount - 1}
         pageCount={pageCount}
         pageIndex={page}
       />
