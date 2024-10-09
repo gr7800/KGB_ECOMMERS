@@ -14,6 +14,7 @@ import HomeWrapper from "../component/HomeWrapper";
 import Register from "../pages/Register";
 import ResetPasword from "../pages/ResetPasword";
 import ContactUs from "../pages/ContactUs";
+import IsUserExists from "../component/HOC/IsUserExists";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element:<IsUserExists>  <Cart /></IsUserExists>,
       },
       {
         path: "/blog",
