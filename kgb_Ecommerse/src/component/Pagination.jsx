@@ -5,7 +5,7 @@ function Button2({ content, onClick, active, disabled }) {
   return (
     <button
       className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-[0_4px_10px_rgba(0,0,0,0.03)] text-lg font-normal transition-colors rounded-lg
-      ${active ? "bg-rose-400 text-white" : "text-rose-400"}
+      ${active ? "bg-rose-600 text-white" : "text-[#ff006c]"}
       ${
         !disabled
           ? "bg-white hover:bg-rose-500 hover:text-white"
