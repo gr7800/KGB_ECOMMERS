@@ -6,10 +6,10 @@ import cartReducer from "./slices/cartSlice";
 
 const store = configureStore({
   reducer: {
-    auth:authReducer,
+    auth: authReducer,
     product: productReducer,
-    blogs:blogReducer,
-    cart:cartReducer
+    blogs: blogReducer,
+    cart: cartReducer,
   },
 });
 

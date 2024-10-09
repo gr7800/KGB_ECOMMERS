@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
+  fetchAllProductCategories,
   fetchProductByIdApi,
   fetchProductsApi,
 } from "../../ApiService/ProductService";
@@ -15,10 +16,16 @@ const fetchProductById = createAsyncThunk(
   }
 );
 
+const fetchAllCategories = createAsyncThunk(
+  "products/fetchAllCategories",
+  async () => fetchAllProductCategories()
+);
+
 export const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
+    category: [],
     singleProduct: null,
     isLoading: false,
     error: null,
@@ -51,9 +58,22 @@ export const productSlice = createSlice({
         console.error("Error while fetching product:", action.error.message);
         state.isLoading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchAllCategories.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllCategories.fulfilled, (state, action) => {
+        state.category = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchAllCategories.rejected, (state, action) => {
+        console.error("Error while fetching product:", action.error.message);
+        state.isLoading = false;
+        state.error = action.error.message;
       });
   },
 });
 
 export default productSlice.reducer;
-export { fetchProducts, fetchProductById };
+export { fetchProducts, fetchProductById, fetchAllCategories };

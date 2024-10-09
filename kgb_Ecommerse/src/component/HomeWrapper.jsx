@@ -5,13 +5,12 @@ import Footer from "./Footer";
 
 const HomeWrapper = () => {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen">
       <Navbar />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
 
 export default HomeWrapper;
-("");

@@ -18,32 +18,48 @@ Team Members :
 
 Guddu:
 Folder structure
-Routing
-Redux Toolkit, thunk setup  => Slices (Products, blogs, auth)
+Redux Toolkit, thunk setup  => Slices (Products, blogs,cart, auth,currency)
 Carousel
-Header - active nav link, logo, currency 
+Header - active nav link, logo,
+footer
+HomePage
+
+Todo:
+Carousel
+Header -> 
+Footer -> links
 
 
 Khushi:
+Routing
 
 Home page
 Product Listing
 SIngle product 
 Blog
-SIngle blog -> back gitto same page
+SIngle blog -> back to same page
 Cart
 User
 
+Todo:
+Single Product -> data
+Single blog -> data and back to same page
+User
+Currency
+Cart -> data, clear cart
+
 
 Bharat:
-Firebase - Login, signup page, JWT token, private route, store data in firebase
-Signup - withEmail, withPhone
+Done:
+Firebase - Login, signup page
 Contact page - Formik
-User page - password change pop up
 Pagination - Products, Blogs
-Footer
 
 
+Todo:
+Firebase - JWT Token, Private Route, Store data in Firebase
+Signup - withEmail, withPhone
+User page - password change pop up
 
 Tech Stack:
 react-router-dom

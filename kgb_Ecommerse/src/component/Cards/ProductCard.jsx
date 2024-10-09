@@ -35,7 +35,7 @@ const ProductCard = ({
 
             <div className="flex gap-1 items-center justify-start pb-2">
               {[...Array(Math.round(rating.rate))].map((star, index) => (
-                <FaStar className="text-rose-900" />
+                <FaStar key={index} className="text-rose-900" />
               ))}
             </div>
 
