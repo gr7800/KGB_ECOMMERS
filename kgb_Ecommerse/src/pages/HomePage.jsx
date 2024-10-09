@@ -8,7 +8,6 @@ import {
 } from "../redux/slices/productSlice";
 import { crouseLImages } from "../utils/constant";
 
-
 const HomePage = () => {
   const { category } = useSelector((state) => state.product);
   const dispatch = useDispatch();
@@ -17,23 +16,31 @@ const HomePage = () => {
     dispatch(fetchAllCategories());
   }, []);
 
-  
-
   return (
-    <div className="bg-[url('./assets/glitter-background.png')] bg-cover bg-fixed px-10 py-10 flex flex-col gap-5">
-      <Carousel data = {crouseLImages}/>
-      <h2 className="text-center text-5xl font-bold text-rose-900">
-        Shop by Category
-      </h2>
-      {category &&
-        category.length > 0 &&
-        category.map((categ, index) => (
-          <CategoryProducts
-            key={categ + index}
-            heading={categ.toUpperCase()}
-            categoryName={categ}
-          />
-        ))}
+    <div className="bg-[url('./assets/glitter-background.png')] bg-cover bg-fixed flex flex-col gap-5">
+      <div className="bg-light-pink-1 px-10 py-10 h-screen">
+        <Carousel
+          data={crouseLImages}
+          autoSlide={true}
+          autoSlideInterval={10000}
+        />
+      </div>
+      <div className="px-10 py-10">
+        <h2 className="text-center text-5xl font-bold text-rose-900">
+          Shop by Category
+        </h2>
+        <div className="flex flex-col gap-5">
+          {category &&
+            category.length > 0 &&
+            category.map((categ, index) => (
+              <CategoryProducts
+                key={categ + index}
+                heading={categ.toUpperCase()}
+                categoryName={categ}
+              />
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
