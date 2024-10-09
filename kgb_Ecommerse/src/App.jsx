@@ -1,13 +1,12 @@
-import { AllRoutes } from './AllRoutes/AllRoutes'
-import './App.css'
+import { AllRoutes } from "./AllRoutes/AllRoutes";
+import {Provider} from "react-redux"
+import "./App.css";
+import store from "./redux/store";
 
 function App() {
-  return (
-    <>
-      <AllRoutes />
-    </>
-
-  )
+  return <Provider store = {store} >
+    <AllRoutes />
+  </Provider>;
 }
 
-export default App
+export default App;

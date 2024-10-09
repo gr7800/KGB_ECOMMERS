@@ -6,11 +6,11 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-center items-center">
         <div className="flex flex-col justify-center gap-5 w-full lg:w-[60%] md:w-[70%] sm:w-[90%]">
           <ul className="flex justify-center space-x-4 mb-4 md:mb-0 w-full">
-            <li className="cursor-pointer hover:text-[#e67e22] transition-colors duration-200">Terms Of Use</li>
-            <li className="cursor-pointer hover:text-[#e67e22] transition-colors duration-200">Privacy Policy</li>
-            <li className="cursor-pointer hover:text-[#e67e22] transition-colors duration-200">About</li>
-            <li className="cursor-pointer hover:text-[#e67e22] transition-colors duration-200">Blog</li>
-            <li className="cursor-pointer hover:text-[#e67e22] transition-colors duration-200">FAQ</li>
+            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">Terms Of Use</li>
+            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">Privacy Policy</li>
+            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">About</li>
+            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">Blog</li>
+            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">FAQ</li>
           </ul>
 
           <div className="text-sm mb-4 md:mb-0 text-[#ff006c] w-full text-center">
