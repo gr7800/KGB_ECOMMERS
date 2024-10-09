@@ -8,7 +8,7 @@ const HomeWrapper = () => {
     <div className="min-h-screen relative">
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
