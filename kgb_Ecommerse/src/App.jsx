@@ -1,26 +1,12 @@
-import { AllRoutes } from './AllRoutes/AllRoutes'
-import './App.css'
+import { AllRoutes } from "./AllRoutes/AllRoutes";
+import {Provider} from "react-redux"
+import "./App.css";
+import store from "./redux/store";
 
 function App() {
-  return (
-<>
-     k-fixes
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-    <div className='bg-light-pink-1 h-64'>
-      hi
-    </div>
-    <div className='bg-light-rose h-64'>
-      hi
-    </div>
-    <div className='bg-light-pink-2 h-64'>
-      hi
-    </div>
-  </h1>
+  return <Provider store = {store} >
     <AllRoutes />
-</>
-   
-  )
+  </Provider>;
 }
 
-export default App
+export default App;

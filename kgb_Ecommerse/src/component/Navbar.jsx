@@ -34,7 +34,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/products"
-              className={`hover:underline hover:text-[#e67e22] transition-colors duration-200 ${pathname === "/products" && 'text-[#ff006c]'}`}
+              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${pathname === "/products" && 'text-[#ff006c]'}`}
               onClick={() => setIsOpen(false)}
             >
               Products
@@ -43,7 +43,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/blog?page=1"
-              className={`hover:underline hover:text-[#e67e22] transition-colors duration-200 ${pathname === "/blog" && 'text-[#ff006c]'}`}
+              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${pathname === "/blog" && 'text-[#ff006c]'}`}
               onClick={() => setIsOpen(false)}
             >
               Blog
@@ -52,7 +52,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/cart"
-              className={`hover:text-[#e67e22] transition-colors duration-200 ${pathname === "/cart" && 'text-[#ff006c]'}`}
+              className={`hover:text-rose-900 transition-colors duration-200 ${pathname === "/cart" && 'text-[#ff006c]'}`}
               onClick={() => setIsOpen(false)}
             >
               <FaCartPlus size={24} />
@@ -61,7 +61,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/profile"
-              className={`hover:text-[#e67e22] transition-colors duration-200 ${pathname === "/profile" && 'text-[#ff006c]'}`}
+              className={`hover:text-rose-900 transition-colors duration-200 ${pathname === "/profile" && 'text-[#ff006c]'}`}
               onClick={() => setIsOpen(false)}
             >
               <CgProfile size={24} />
