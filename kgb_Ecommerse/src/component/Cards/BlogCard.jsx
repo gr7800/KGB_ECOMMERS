@@ -1,0 +1,22 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+const BlogCard = () => {
+    const description = " Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora autem labore consequatur esse error veritatis, alias, saepe aspernatur quisquam repellat quasi sit nesciunt praesentium voluptate perferendis. Veniam fugit labore architecto."
+    return (
+        <Link to="/blog/1">
+            <div
+                className="flex flex-col bg-rose-300 w-96 h-48 p-4 rounded cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition"
+            >
+                <p className='bg-rose-900 p-2 rounded-full w-10 text-center text-white font-bold'>1</p>
+                <p className="py-3 font-bold text-xl text-rose-900">Blog Title</p>
+
+                    <p className="text-white font-semibold">
+                        {description.split(" ").slice(0, 15).join(" ") + "..."}
+                    </p>
+            </div>
+        </Link>
+    )
+}
+
+export default BlogCard

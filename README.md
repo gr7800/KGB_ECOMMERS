@@ -9,7 +9,8 @@ Theme:
 
 light pink : #fae9e6
 light rose: #eec6c6
-dark rose: bg-rose-900 
+dark rose: rose-900 
+primary-rose: rose-300
 
 
 
