@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Register = () => {
+    const [name, setname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [password1, setPassword1] = useState("")
+    const [username, setUsername] = useState("")
+
+    function handleSignup(e) {
+    //     e.preventDefault()
+    //     console.log(name, password,email,password1,username,"password1")
+ 
+    }
+
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -18,11 +31,11 @@ const Register = () => {
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <form method="POST" action="#">
+                    <form onSubmit={handleSignup} action="#">
                         <div>
                             <label for="email" className="block text-sm font-medium leading-5  text-gray-700">Name</label>
                             <div className="mt-1 relative rounded-md shadow-sm">
-                                <input id="name" name="name" placeholder="John Doe" type="text" required=""
+                                <input value={name} onChange={(e) => setname(e.target.value)} id="name" name="name" placeholder="John Doe" type="text" required=""
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 <div className="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -38,7 +51,7 @@ const Register = () => {
                         <div className="mt-6">
                             <label for="username" className="block text-sm font-medium leading-5 text-gray-700">Username</label>
                             <div className="mt-1 relative rounded-md shadow-sm">
-                                <input id="email" name="email" placeholder="exampleuser" type="email"
+                                <input value={username} onChange={(e) => setUsername(e.target.value)} id="email" name="email" placeholder="exampleuser" type="text"
                                     required=""
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 <div className="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -56,7 +69,7 @@ const Register = () => {
                                 Email address
                             </label>
                             <div className="mt-1 relative rounded-md shadow-sm">
-                                <input id="email" name="email" placeholder="user@example.com" type="email"
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} id="email" name="email" placeholder="user@example.com" type="email"
                                     required=""
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                 <div className="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -74,7 +87,7 @@ const Register = () => {
                                 Password
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
-                                <input id="password" name="password" type="password" required=""
+                                <input value={password} onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="password" required=""
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
                         </div>
@@ -84,7 +97,7 @@ const Register = () => {
                                 Confirm Password
                             </label>
                             <div className="mt-1 rounded-md shadow-sm">
-                                <input id="password_confirmation" name="password_confirmation" type="password" required=""
+                                <input value={password1} onChange={(e) => setPassword1(e.target.value)} id="password_confirmation" name="password_confirmation" type="password" required=""
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
                         </div>
