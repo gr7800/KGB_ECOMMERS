@@ -93,8 +93,8 @@ function Pagination({pageCount, gotoPage, page}) {
     <div className="flex gap-3 flex-wrap p-6 py-12">
       <PaginationNav1
         gotoPage={gotoPage}
-        canPreviousPage={pageIndex > 0}
-        canNextPage={pageIndex < pageCount - 1}
+        canPreviousPage={page > 0}
+        canNextPage={page < pageCount - 1}
         pageCount={pageCount}
         pageIndex={page}
       />
