@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { fetchBlogByIdApi, fetchBlogsApi } from "../../ApiService/BlogService";
 
 const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
-  return fetchBlogs();
+  return fetchBlogsApi();
 });
 
 const fetchBlogsById = createAsyncThunk("blogs/fetchBlogsById", async (id) => {
-  return fetchBlogsById(id);
+  return fetchBlogByIdApi(id);
 });
 
 export const blogSlice = createSlice({
