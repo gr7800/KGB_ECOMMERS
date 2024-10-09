@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {Auth} from "../firebase.js"
 
 const Register = () => {
+    const [name, setname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [password1,setPassword1] = useState("")
+    const [username,setUsername] = useState("")
+
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
