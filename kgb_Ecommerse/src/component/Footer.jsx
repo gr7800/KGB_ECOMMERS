@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,9 +13,11 @@ const Footer = () => {
             <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">
               Privacy Policy
             </li>
-            <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">
-              About
-            </li>
+            <Link to={"/contact-us"}>
+              <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">
+                Contact
+              </li>
+            </Link>
             <li className="cursor-pointer hover:text-rose-900 transition-colors duration-200">
               Blog
             </li>
