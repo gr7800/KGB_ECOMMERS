@@ -8,6 +8,7 @@ import { optionOfCurrencyExchange } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExchangeRate, selectCurrency } from "../redux/slices/currencySlice";
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
@@ -37,8 +38,9 @@ const Navbar = () => {
         {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </div>
       <nav
-        className={`fixed md:relative top-16 md:top-0 right-0 bg-[#fae9e6] transition-transform duration-300 ease-in-out transform ${isOpen ? "translate-x-0" : "translate-x-full"
-          } md:translate-x-0 z-50`}
+        className={`fixed md:relative top-16 md:top-0 right-0 bg-[#fae9e6] transition-transform duration-300 ease-in-out transform ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } md:translate-x-0 z-50`}
       >
         <ul className="flex flex-col md:flex-row gap-5 justify-center items-center md:p-0">
           <li>
@@ -48,8 +50,13 @@ const Navbar = () => {
               onChange={(e) => dispatch(selectCurrency(e.target.value))}
               value={currentCurrency}
             >
-              {optionOfCurrencyExchange.map((item, index) => (
-                <option key={index} value={item.value} className="bg-[#fae9e6] text-[#fa7fab]">
+
+              {OptionOfCarrencyExchange.map((item, index) => (
+                <option
+                  key={index}
+                  value={item.value}
+                  className="bg-[#fae9e6] text-[#fa7fab]"
+                >
                   {item.name} {item.symbol}
                 </option>
               ))}
@@ -58,7 +65,9 @@ const Navbar = () => {
           <li>
             <Link
               to="/products"
-              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${pathname === "/products" && 'text-[#ff006c]'}`}
+              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${
+                pathname === "/products" && "text-[#ff006c]"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Products
@@ -67,7 +76,9 @@ const Navbar = () => {
           <li>
             <Link
               to="/blog?page=1"
-              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${pathname === "/blog" && 'text-[#ff006c]'}`}
+              className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${
+                pathname === "/blog" && "text-[#ff006c]"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               Blog
@@ -76,21 +87,39 @@ const Navbar = () => {
           <li>
             <Link
               to="/cart"
-              className={`hover:text-rose-900 transition-colors duration-200 ${pathname === "/cart" && 'text-[#ff006c]'}`}
+              className={`hover:text-rose-900 transition-colors duration-200 ${
+                pathname === "/cart" && "text-[#ff006c]"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               <FaCartPlus size={24} />
             </Link>
           </li>
-          <li>
-            <Link
-              to="/profile"
-              className={`hover:text-rose-900 transition-colors duration-200 ${pathname === "/profile" && 'text-[#ff006c]'}`}
-              onClick={() => setIsOpen(false)}
-            >
-              <CgProfile size={24} />
-            </Link>
-          </li>
+          {token ? (
+            <li>
+              <Link
+                to="/profile"
+                className={`hover:text-rose-900 transition-colors duration-200 ${
+                  pathname === "/profile" && "text-[#ff006c]"
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                <CgProfile size={24} />
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/cart"
+                className={`hover:text-rose-900 transition-colors duration-200 ${
+                  pathname === "/login" && "text-[#ff006c]"
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
