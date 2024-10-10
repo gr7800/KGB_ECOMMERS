@@ -7,15 +7,15 @@ import LoadingScreen from "../component/LoadingScreen";
 
 const ProductPage = () => {
   const { products, isLoading, error } = useSelector((state) => state.product);
-  const [page, setPage] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);
 
-  function gotoPage(pageIndex) {
-    setPage(pageIndex);
+  function gotoPage(currePageIndex) {
+    setPageIndex(currePageIndex);
   }
 
   if (isLoading) {
@@ -31,7 +31,7 @@ const ProductPage = () => {
       <div className="flex flex-wrap gap-5 justify-center items-center">
         {products &&
           products.length > 0 &&
-          products.slice(page * 5, (page * 5) + 5).map((product) => (
+          products.slice(pageIndex * 5, (pageIndex * 5) + 5).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
       </div>
@@ -40,7 +40,7 @@ const ProductPage = () => {
         <Pagination
           pageCount={products.length / 5}
           gotoPage={gotoPage}
-          page={page}
+          pageIndex={pageIndex}
         />
       </div>
     </section>
