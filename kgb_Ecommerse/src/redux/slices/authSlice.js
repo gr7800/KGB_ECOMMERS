@@ -58,6 +58,7 @@ export const userData = createAsyncThunk(
 );
 
 export const logOut = createAsyncThunk("auth/logOut", async () => {
+  localStorage.removeItem("token");
   await doSignOut();
 });
 
@@ -103,6 +104,7 @@ const authSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = null;
+        state.token = "";
         state.isLoading = false;
       })
       .addCase(logOut.rejected, (state, action) => {
