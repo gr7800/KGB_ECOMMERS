@@ -8,7 +8,6 @@ import SingleProductPage from "../pages/SingleProductPage";
 import NotFoundPage from "../component/NotFoundPage";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
-import Signup from "../pages/Signup";
 import HomeWrapper from "../component/HomeWrapper";
 import Register from "../pages/Register";
 import ContactUs from "../pages/ContactUs";
@@ -65,10 +64,6 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <IsAuth><Register /></IsAuth>,
-      },
-      {
-        path: "/signup",
-        element: <Signup />,
       },
       {
         path: "/contact-us",

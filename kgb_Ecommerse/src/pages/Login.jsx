@@ -16,9 +16,8 @@ const validationSchema = Yup.object({
 });
 
 const Login = () => {
-
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -32,10 +31,9 @@ const Login = () => {
           values.email,
           values.password
         );
-        dispatch(signIn(user?._tokenResponse.idToken||""))
+        dispatch(signIn(user?._tokenResponse.idToken || ""));
         navigate("/");
       } catch (err) {
- 
         switch (err.code) {
           case "auth/user-not-found":
             setErrors({
@@ -56,7 +54,7 @@ const Login = () => {
           case "auth/invalid-credential":
             setErrors({
               email: "Invalid credentials.",
-              password:"Invalid credentials."
+              password: "Invalid credentials.",
             });
             break;
           default:
@@ -100,9 +98,9 @@ const Login = () => {
               placeholder="Email"
               className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] focus:ring-2 focus:ring-[#ff006c] transition duration-200"
             />
-             {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: 'red' }}>{formik.errors.email}</div>
-          ) : null}
+            {formik.touched.email && formik.errors.email ? (
+              <div style={{ color: "red" }}>{formik.errors.email}</div>
+            ) : null}
           </div>
 
           <div className="mt-4">
@@ -129,7 +127,16 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end mt-4">
+          <div className="flex flex-col    justify-end mt-4">
+            <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w mb-3">
+              Already have an account?
+              <span
+                onClick={() => navigate("/register")}
+                className="pl-2 cursor-pointer font-medium text-rose-500 hover:text-rose-600 focus:outline-none focus:underline transition ease-in-out duration-150"
+              >
+                Sign Up
+              </span>{" "}
+            </p>
             <button
               type="submit"
               className="p-4 text-white hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#ff006c]"

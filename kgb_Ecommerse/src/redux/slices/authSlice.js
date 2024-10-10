@@ -45,7 +45,7 @@ export const userData = createAsyncThunk(
       const docRef = doc(db, "users", decodedToken.user_id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() } // Store the document data
+        return { id: docSnap.id, ...docSnap.data() } 
       } else {
         return {}
       }
