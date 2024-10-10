@@ -1,9 +1,14 @@
 import React from "react";
 import ProductCard from "./Cards/ProductCard";
 import useCategoriesWiseData from "../hooks/useCategoriesWiseData ";
+import LoadingScreen from "./LoadingScreen";
 
 const CategoryProducts = ({ heading, categoryName }) => {
   const { items } = useCategoriesWiseData(categoryName);
+
+  if (items.length == 0) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div>
@@ -11,7 +16,7 @@ const CategoryProducts = ({ heading, categoryName }) => {
       <div className="flex gap-5 items-center justify-between overflow-x-auto no-scrollbar">
         {items &&
           items.length > 0 &&
-          items.map((item) => <ProductCard {...item} />)}
+          items.map((product) => <ProductCard product={product} />)}
       </div>
     </div>
   );

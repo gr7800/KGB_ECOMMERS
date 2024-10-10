@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebaseConfig";
-import { updateProfile } from "firebase/auth";
-import { doSignOut } from "../../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
+import {  doSignOut } from "../../firebase";
+
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
@@ -30,10 +30,11 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
   "auth/signIn",
   async (token) => {
-    localStorage.setItem("token", token || "");
+    localStorage.setItem("token", token||"");
     return token || ""
   }
 );
+
 
 export const userData = createAsyncThunk(
   "auth/userData",
@@ -116,6 +117,7 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(userData.rejected, (state, action) => {
+
         state.isLoading = false;
         state.error = action.error.message;
       });
