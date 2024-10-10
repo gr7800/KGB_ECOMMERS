@@ -15,6 +15,7 @@ import Register from "../pages/Register";
 import ResetPasword from "../pages/ResetPasword";
 import ContactUs from "../pages/ContactUs";
 import IsUserExists from "../component/HOC/IsUserExists";
+import IsAuth from "../component/HOC/isAuth";
 
 const router = createBrowserRouter([
   {
@@ -65,11 +66,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <IsAuth><Login /></IsAuth>,
       },
       {
         path: "/register",
-        element: <Register />,
+        element: <IsAuth><Register /></IsAuth>,
       },
       {
         path: "/signup",

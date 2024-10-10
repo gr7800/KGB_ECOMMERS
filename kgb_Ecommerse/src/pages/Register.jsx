@@ -6,9 +6,12 @@ import { db } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { signUp } from "../redux/slices/authSlice";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -37,25 +40,8 @@ const Register = () => {
           values.email,
           values.password
         );
-        const user = userCredentials.user;
 
-        await updateProfile(user, {
-          displayName: values.username,
-        });
-
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          username: values.username,
-          email: values.email,
-          name: values.name,
-        });
-
-        localStorage.setItem(
-          "token",
-          userCredentials?._tokenResponse.idToken || ""
-        );
-        navigate("/");
-        alert("User created successfully!");
+        dispatch(signUp({userCredentials,values}));
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {
           setErrors({
@@ -63,7 +49,6 @@ const Register = () => {
           });
         } else {
           alert("Something went wrong. Please try again later.");
-          console.error("Signup error:", err.message);
         }
       } finally {
         setSubmitting(false);
