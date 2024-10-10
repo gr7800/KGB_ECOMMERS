@@ -1,6 +1,17 @@
-import React from "react";
+
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { userData } from '../redux/slices/authSlice'
 import defaultProfile from "../assets/DefaultProfile.jpg";
+
 const Profile = () => {
+  const dispatch = useDispatch()
+  const {token, user} = useSelector((state)=>state.auth) 
+
+  useEffect(()=>{
+    dispatch(userData(token))
+  },[])
+  
   return (
     <div className="w-full  flex  justify-center bg-pink-100 text-rose-900 py-10 px-10">
       <div className="rounded-lg shadow-lg shadow-rose-900 p-8 max-w-sm w-full text-center my-auto bg-rose-300">
