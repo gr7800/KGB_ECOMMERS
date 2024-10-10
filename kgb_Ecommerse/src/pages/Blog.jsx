@@ -5,7 +5,7 @@ import { fetchBlogs } from "../redux/slices/blogSlice";
 import Pagination from "../component/Pagination";
 
 const Blog = () => {
-  const [page, setPage] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const { blogs, singleblogData, isLoading, error } = useSelector(
     (state) => state.blogs
   );
@@ -16,9 +16,10 @@ const Blog = () => {
     dispatch(fetchBlogs());
   }, []);
 
-  function gotoPage(pageIndex) {
-    setPage(pageIndex);
+  function gotoPage(currentPageIndex) {
+    setPageIndex(currentPageIndex);
   }
+
 
   return (
     <section className="bg-light-pink-1 w-full py-8 px-4 flex-col justify-center items-center">
@@ -26,14 +27,14 @@ const Blog = () => {
         {blogs &&
           blogs.length > 0 &&
           blogs
-            .slice(page * 10, page * 10 + 10)
+            .slice(pageIndex * 10, pageIndex * 10 + 10)
             .map((blog) => <BlogCard key={blog.id} {...blog} />)}
       </div>
       {blogs.length > 1 && (
         <div className="flex justify-center pr-5">
           {" "}
           <Pagination
-            page={page}
+            pageIndex={pageIndex}
             gotoPage={gotoPage}
             pageCount={Math.floor(blogs.length / 10)}
           />
