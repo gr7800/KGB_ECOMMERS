@@ -36,7 +36,7 @@ const ProductPage = () => {
           ))}
       </div>
 
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center pr-5">
         <Pagination
           pageCount={products.length / 5}
           gotoPage={gotoPage}

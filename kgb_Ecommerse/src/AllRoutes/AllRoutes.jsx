@@ -4,15 +4,12 @@ import ProductPage from "../pages/ProductPage";
 import Cart from "../pages/Cart";
 import Blog from "../pages/Blog";
 import SingleBlog from "../pages/SingleBlog";
-import Contact from "../pages/Contact";
 import SingleProductPage from "../pages/SingleProductPage";
 import NotFoundPage from "../component/NotFoundPage";
 import Profile from "../pages/Profile";
 import Login from "../pages/Login";
-import Signup from "../pages/Signup";
 import HomeWrapper from "../component/HomeWrapper";
 import Register from "../pages/Register";
-import ResetPasword from "../pages/ResetPasword";
 import ContactUs from "../pages/ContactUs";
 import IsUserExists from "../component/HOC/IsUserExists";
 import IsAuth from "../component/HOC/isAuth";
@@ -57,10 +54,6 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
         path: "/profile",
         element:<IsUserExists> <Profile /></IsUserExists>,
       },
@@ -71,14 +64,6 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <IsAuth><Register /></IsAuth>,
-      },
-      {
-        path: "/signup",
-        element: <Signup />,
-      },
-      {
-        path: "/reset-password",
-        element: <ResetPasword />,
       },
       {
         path: "/contact-us",

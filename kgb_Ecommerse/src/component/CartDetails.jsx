@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SecondaryButton } from './Buttons'
 import { FaInfoCircle } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { totalPriceHandler } from '../redux/slices/cartSlice'
 
 const CartDetails = () => {
     const [isInfo, setIsInfo] = useState(false)
+    const { totalPrice, items } = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
 
-    const totalPrice = 100;
-    
+    useEffect(() => {
+        dispatch(totalPriceHandler())
+    }, [items])
+
     return (
         <div className="flex flex-col gap-4 items-end border-2 h-[28rem] border-white">
             <div className="w-96 max-sm:w-full max-sm:p-0">
@@ -44,14 +50,14 @@ const CartDetails = () => {
 
 
 
-                    {totalPrice < 1000 && <p className='text-rose-900 mt-6'>You need to add items worth ₹{1000 - totalPrice} more to get Free Delivery</p>}
+                    {totalPrice < 1000 && <p className='text-rose-900 mt-6'>You need to add items worth ₹{(1000 - totalPrice).toFixed(2)} more to get Free Delivery</p>}
                 </div>
 
                 <hr className='h-px bg-white border-0' />
 
                 <div className="flex items-center px-4 py-6">
                     <p className="flex-grow font-bold">Total Amount:</p>
-                    <p>₹{totalPrice + 70}</p>
+                    <p>₹{totalPrice < 1000 ? (totalPrice + 70).toFixed(2) : totalPrice}</p>
                 </div>
 
                 <div className="px-4" >
