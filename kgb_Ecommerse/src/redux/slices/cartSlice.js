@@ -13,6 +13,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: {
     items: loadCartFromLocalStorage(),
+    totalPrice: 0
   },
   reducers: {
     addItem: (state, action) => {
@@ -53,10 +54,13 @@ const cartSlice = createSlice({
         existingItem.quantity += action.payload.quantity;
         saveCartToLocalStorage(state.items);
       }
+    },
+    totalPriceHandler: (state, action) => {
+      state.totalPrice = Number(state.items.reduce((acc, cur) => (cur.price * cur.quantity) + acc, 0).toFixed(2))
     }
   },
 });
 
-export const { addItem, removeItem, clearCart, updateItemQuantity } =
+export const { addItem, removeItem, clearCart, updateItemQuantity, totalPriceHandler } =
   cartSlice.actions;
 export default cartSlice.reducer;
