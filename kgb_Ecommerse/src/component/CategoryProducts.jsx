@@ -16,7 +16,9 @@ const CategoryProducts = ({ heading, categoryName }) => {
       <div className="flex gap-5 items-center justify-between overflow-x-auto no-scrollbar">
         {items &&
           items.length > 0 &&
-          items.map((product) => <ProductCard product={product} />)}
+          items.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </div>
     </div>
   );
