@@ -23,4 +23,4 @@ const BlogCard = ({ id, title, body }) => {
     )
 }
 
-export default BlogCard
+export default BlogCard;
