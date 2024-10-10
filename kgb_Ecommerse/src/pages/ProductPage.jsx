@@ -6,7 +6,7 @@ import Pagination from "../component/Pagination";
 import LoadingScreen from "../component/LoadingScreen";
 
 const ProductPage = () => {
-  const { products, isLoading } = useSelector((state) => state.product);
+  const { products, isLoading, error } = useSelector((state) => state.product);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
 
@@ -19,23 +19,30 @@ const ProductPage = () => {
   }
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreen />;
   }
 
+  if (error) {
+    console.log(error);
+  }
+  
   return (
     <section className="py-16 px-10 bg-light-pink-1">
       <div className="flex flex-wrap gap-5 justify-center items-center">
         {products &&
           products.length > 0 &&
-          products.slice(page * 5, (page * 5) + 5).map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
+          products
+            .slice(page * 5, page * 5 + 5)
+            .map((product) => <ProductCard key={product.id} {...product} />)}
       </div>
 
-      <div className='flex justify-center mt-10'>
-        <Pagination pageCount={products.length / 5} gotoPage={gotoPage} page={page} />
+      <div className="flex justify-center mt-10">
+        <Pagination
+          pageCount={products.length / 5}
+          gotoPage={gotoPage}
+          page={page}
+        />
       </div>
-
     </section>
   );
 };
