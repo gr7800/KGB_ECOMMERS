@@ -3,6 +3,8 @@ import { doSignInWithEmailIdAndPassword } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup"; // for schema validation
+import { useDispatch } from "react-redux";
+import { signIn } from "../redux/slices/authSlice";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -16,36 +18,7 @@ const validationSchema = Yup.object({
 const Login = () => {
 
   const navigate = useNavigate();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      let user = await doSignInWithEmailIdAndPassword(email, password);
-      localStorage.setItem("token", user?._tokenResponse.idToken);
-      navigate("/");
-    } catch (err) {
-      switch (err.code) {
-        case "auth/user-not-found":
-          console.log("No user found with this email. Please sign up first.");
-          break;
-        case "auth/wrong-password":
-          console.log("Incorrect password. Please try again.");
-          break;
-        case "auth/invalid-email":
-          console.log(
-            "The email address is invalid. Please enter a valid email."
-          );
-          break;
-        case "auth/user-disabled":
-          console.log(
-            "This account has been disabled. Please contact support."
-          );
-          break;
-        default:
-          console.log("An error occurred: ", err.message);
-      }
-    }
-  }
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -59,7 +32,7 @@ const Login = () => {
           values.email,
           values.password
         );
-        localStorage.setItem("token", user?._tokenResponse.idToken);
+        dispatch(signIn(user?._tokenResponse.idToken||""))
         navigate("/");
       } catch (err) {
  

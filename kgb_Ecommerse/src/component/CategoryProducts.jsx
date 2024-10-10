@@ -1,9 +1,14 @@
 import React from "react";
 import ProductCard from "./Cards/ProductCard";
 import useCategoriesWiseData from "../hooks/useCategoriesWiseData ";
+import LoadingScreen from "./LoadingScreen";
 
 const CategoryProducts = ({ heading, categoryName }) => {
   const { items } = useCategoriesWiseData(categoryName);
+
+  if (items.length == 0) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div>

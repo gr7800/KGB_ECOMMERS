@@ -5,7 +5,7 @@ function Button2({ content, onClick, active, disabled }) {
   return (
     <button
       className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-[0_4px_10px_rgba(0,0,0,0.03)] text-lg font-normal transition-colors rounded-lg
-      ${active ? "bg-rose-300 text-white" : "text-[#ff006c]"}
+      ${active ? "bg-rose-500 text-white" : "text-[#ff006c]"}
       ${
         !disabled
           ? "bg-white hover:bg-rose-500 hover:text-white"
@@ -66,7 +66,7 @@ function PaginationNav1({
               <FaChevronLeft size="0.7rem" className="-translate-x-1/2" />
             </div>
           }
-          onClick={() => gotoPage(pageIndex-1)}
+          onClick={() => gotoPage(pageIndex - 1)}
           disabled={!canPreviousPage}
         />
       </li>
@@ -87,8 +87,7 @@ function PaginationNav1({
   );
 }
 
-function Pagination({pageCount, gotoPage, page}) {
-
+function Pagination({ pageCount, gotoPage, page }) {
   return (
     <div className="flex gap-3 flex-wrap p-6 py-12">
       <PaginationNav1
@@ -101,6 +100,5 @@ function Pagination({pageCount, gotoPage, page}) {
     </div>
   );
 }
-
 
 export default Pagination;
