@@ -33,7 +33,7 @@ export const AddToCartButton = ({ onClick, large }) => {
     <>
       <button
         onClick={onClick}
-        className={` w-full text-lg py-2 border border-rose-200 px-2  bg-rose-50 transition-all delay-150 hover:bg-rose-300 hover:text-white max-sm:text-base max-sm:py-1 max-sm:px-2`}
+        className={`${large && "text-xl w-full"} w-full text-lg py-2 border border-rose-200 px-2  bg-rose-50 transition-all delay-150 hover:bg-rose-300 hover:text-white max-sm:text-base max-sm:py-1 max-sm:px-2`}
       >
         Add to cart
       </button>

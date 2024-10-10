@@ -31,9 +31,9 @@ const ProductPage = () => {
       <div className="flex flex-wrap gap-5 justify-center items-center">
         {products &&
           products.length > 0 &&
-          products
-            .slice(page * 5, page * 5 + 5)
-            .map((product) => <ProductCard key={product.id} {...product} />)}
+          products.slice(page * 5, (page * 5) + 5).map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
       </div>
 
       <div className="flex justify-center mt-10">
