@@ -152,16 +152,6 @@ const Login = () => {
           </div>
 
           <div className="w-[100%] m-auto flex justify-center mt-4">
-
-          <div className="flex flex-col    justify-end mt-4">
-            <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w mb-3">
-              Already have an account?
-              <span
-                onClick={() => navigate("/register")}
-                className="pl-2 cursor-pointer font-medium text-rose-500 hover:text-rose-600 focus:outline-none focus:underline transition ease-in-out duration-150"
-              >
-                Sign Up
-              </span>{" "}
             <button
               type="submit"
               className="p-4 text-white hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#ff006c]"
