@@ -28,7 +28,7 @@ const ProductPage = () => {
         {products &&
           products.length > 0 &&
           products.slice(page * 5, (page * 5) + 5).map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <ProductCard key={product.id} product={product} />
           ))}
       </div>
 

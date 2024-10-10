@@ -53,7 +53,7 @@ const cartSlice = createSlice({
         existingItem.quantity += action.payload.quantity;
         saveCartToLocalStorage(state.items);
       }
-    },
+    }
   },
 });
 
