@@ -23,6 +23,7 @@ Carousel
 Header - active nav link, logo,
 footer
 HomePage
+ProfilePage
 
 Todo:
 Carousel
