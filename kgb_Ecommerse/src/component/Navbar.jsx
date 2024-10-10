@@ -1,19 +1,27 @@
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation} from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaCartPlus } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { optionOfCurrencyExchange } from "../utils/constant";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchExchangeRate, selectCurrency } from "../redux/slices/currencySlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
-  const [currency, setCurrency] = useState("");
+  const { currentCurrency } = useSelector((state) => state.currency);
+
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    dispatch(fetchExchangeRate(currentCurrency))
+  }, [dispatch, currentCurrency])
 
   return (
     <div className="w-full bg-[#fae9e6] flex justify-between items-center px-10 py-3 shadow-md fixed top-0 z-20 text-[#fa7fab] font-semibold">
@@ -37,8 +45,8 @@ const Navbar = () => {
             <select
               name="currency"
               className="bg-transparent text-[#fa7fab] outline-none cursor-pointer  py-1 rounded-md border-2 border-rose-900 p-2 hover:bg-[#fa7fab] hover:text-[#fae9e6] transition-colors duration-200"
-              onChange={(e) => setCurrency(e.target.value)}
-              value={currency}
+              onChange={(e) => dispatch(selectCurrency(e.target.value))}
+              value={currentCurrency}
             >
               {optionOfCurrencyExchange.map((item, index) => (
                 <option key={index} value={item.value} className="bg-[#fae9e6] text-[#fa7fab]">
