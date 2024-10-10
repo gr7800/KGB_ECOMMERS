@@ -9,7 +9,6 @@ const ContactUs = () => {
                     <h2 className="text-4xl font-extrabold text-gray-800">Contact Us</h2>
                     <p className="text-sm text-gray-600 mt-4 leading-relaxed">Have a specific inquiry? Our
                         experienced team is ready to engage with you.</p>
-
                     <form className="mx-auto mt-8 bg-white rounded-lg p-6 shadow-md space-y-4">
                         <input type='text' placeholder='Name'
                             className="w-full rounded-md h-12 px-6 bg-[#f0f1f2] text-sm outline-none" />
