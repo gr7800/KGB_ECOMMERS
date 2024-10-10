@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup"; // for schema validation
 import { useDispatch } from "react-redux";
 import { signIn } from "../redux/slices/authSlice";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebaseConfig";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -15,10 +17,19 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
 const Login = () => {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [isEmailValid, setIsEmailValid] = useState("")
 
   const formik = useFormik({
     initialValues: {
@@ -28,14 +39,14 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
+        setIsEmailValid("")
         let user = await doSignInWithEmailIdAndPassword(
           values.email,
           values.password
         );
-        dispatch(signIn(user?._tokenResponse.idToken||""))
-        navigate("/");
+        dispatch(signIn(user?._tokenResponse.idToken || ""))
       } catch (err) {
- 
+
         switch (err.code) {
           case "auth/user-not-found":
             setErrors({
@@ -56,7 +67,7 @@ const Login = () => {
           case "auth/invalid-credential":
             setErrors({
               email: "Invalid credentials.",
-              password:"Invalid credentials."
+              password: "Invalid credentials."
             });
             break;
           default:
@@ -67,6 +78,15 @@ const Login = () => {
       }
     },
   });
+
+  async function handleForgotPassword() {
+    if (validateEmail(formik.values.email)) {
+      await sendPasswordResetEmail(auth, formik.values.email);
+    }
+    else{
+      setIsEmailValid("Invalid email address")
+    }
+  }
 
   return (
     <div className="font-sans text-[#fa7fab] antialiased bg-[#fae9e6] min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
@@ -100,9 +120,12 @@ const Login = () => {
               placeholder="Email"
               className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] focus:ring-2 focus:ring-[#ff006c] transition duration-200"
             />
-             {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: 'red' }}>{formik.errors.email}</div>
-          ) : null}
+            {formik.touched.email && formik.errors.email ? (
+              <div style={{ color: 'red' }}>{formik.errors.email}</div>
+            ) : null}
+            {
+              isEmailValid && <div style={{ color: 'red' }}>{isEmailValid}</div>
+            }
           </div>
 
           <div className="mt-4">
@@ -129,7 +152,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end mt-4">
+          <div className="w-[100%] m-auto flex justify-center mt-4">
             <button
               type="submit"
               className="p-4 text-white hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#ff006c]"
@@ -138,6 +161,25 @@ const Login = () => {
             </button>
           </div>
         </form>
+        <div className="flex justify-between align-middle mt-2">
+
+          <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w mb-3">
+            don't have an account?
+            <span
+              onClick={() => navigate("/register")}
+              className="pl-2 cursor-pointer font-medium text-rose-500 hover:text-rose-600 focus:outline-none focus:underline transition ease-in-out duration-150"
+            >
+              Signup
+            </span>{" "}
+          </p>
+          {formik.values.email && <span
+            onClick={() => handleForgotPassword()}
+            className="pl-2 mt-2 cursor-pointer text-sm font-medium text-rose-500 hover:text-rose-600 focus:outline-none focus:underline transition ease-in-out duration-150"
+          >
+            Forgot Password?
+          </span>
+          }
+        </div>
       </div>
     </div>
   );
