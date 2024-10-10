@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { FaCartPlus } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { OptionOfCarrencyExchange } from "../utils/constant";
+import { optionOfCurrencyExchange } from "../utils/constant";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,11 +36,11 @@ const Navbar = () => {
           <li>
             <select
               name="currency"
-              className="bg-transparent text-[#fa7fab] outline-none cursor-pointer  py-1 rounded-md hover:bg-[#fa7fab] hover:text-[#fae9e6] transition-colors duration-200"
+              className="bg-transparent text-[#fa7fab] outline-none cursor-pointer  py-1 rounded-md border-2 border-rose-900 p-2 hover:bg-[#fa7fab] hover:text-[#fae9e6] transition-colors duration-200"
               onChange={(e) => setCurrency(e.target.value)}
               value={currency}
             >
-              {OptionOfCarrencyExchange.map((item, index) => (
+              {optionOfCurrencyExchange.map((item, index) => (
                 <option key={index} value={item.value} className="bg-[#fae9e6] text-[#fa7fab]">
                   {item.name} {item.symbol}
                 </option>

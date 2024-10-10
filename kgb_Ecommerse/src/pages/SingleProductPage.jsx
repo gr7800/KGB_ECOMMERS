@@ -7,6 +7,7 @@ import LoadingScreen from "../component/LoadingScreen";
 import { AddToCartButton, RemoveFromCartButton } from "../component/Buttons";
 import { addItem, removeItem } from "../redux/slices/cartSlice";
 import useCheckIsInCart from "../hooks/useCheckIsInCart";
+import { RWebShare } from "react-web-share";
 
 const SingleProductPage = () => {
   const { productId } = useParams();
@@ -20,10 +21,6 @@ const SingleProductPage = () => {
   useEffect(() => {
     dispatch(fetchProductById(productId))
   }, [])
-
-
-  // console.log(items);
-  // console.log(isInCart)
 
   const onAddButtonClickHandler = () => {
     dispatch(addItem(singleProduct))
@@ -89,17 +86,18 @@ const SingleProductPage = () => {
                 </div>
 
                 <div>
-                  {/* <RWebShare
+                  <RWebShare
               data={{
-                text: "Shop Now on Booklet",
+                text: "Shop Now on KGB",
                 url: "http://booklet-c1aa8.web.app/products/" + id,
-                title: name,
+                title: title,
               }}
             >
               <div className="flex gap-3 items-center cursor-pointer">
+              http://booklet-c1aa8.web.app/products/3
                 <i className="fa-solid fa-share-nodes text-rose-900"></i> Share
               </div>
-            </RWebShare> */}
+            </RWebShare>
                 </div>
               </div>
             </div>
