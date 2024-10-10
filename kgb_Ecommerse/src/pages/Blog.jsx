@@ -20,6 +20,7 @@ const Blog = () => {
     setPage(pageIndex);
   }
 
+
   return (
     <section className="bg-light-pink-1 w-full py-8 px-4 flex-col justify-center items-center">
       <div className="flex flex-wrap w-full justify-center gap-5">
