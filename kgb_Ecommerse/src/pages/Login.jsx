@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { doSignInWithEmailIdAndPassword } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -67,15 +67,15 @@ const Login = () => {
   });
 
   return (
-    <div className="font-sans text-[#fa7fab] antialiased bg-[#fae9e6] min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+    <div className="font-sans text-[#fa7fab] antialiased bg-[#fae9e6] min-h-screen flex flex-col justify-center items-center px-6 sm:px-10 py-6 sm:py-10">
       <div>
-        <h2 className="font-bold text-[#ff006c] text-3xl">
+        <h2 className="font-bold text-[#ff006c] text-3xl text-center">
           <span className="bg-[#ff006c] text-white px-2 rounded-md">KGB</span>{" "}
           Ecommerce
         </h2>
       </div>
 
-      <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+      <div className="w-full sm:max-w-md mt-6 px-4 sm:px-6 py-4 bg-white shadow-md overflow-hidden rounded-md shadow-pink-900">
         <form onSubmit={formik.handleSubmit}>
           <div className="py-8 text-center">
             <span className="text-2xl font-semibold text-[#ff006c]">
@@ -96,10 +96,12 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] focus:ring-2 focus:ring-[#ff006c] transition duration-200"
+              className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
             />
             {formik.touched.email && formik.errors.email ? (
-              <div style={{ color: "red" }}>{formik.errors.email}</div>
+              <div className="text-red-500 text-sm mt-1">
+                {formik.errors.email}
+              </div>
             ) : null}
           </div>
 
@@ -119,27 +121,29 @@ const Login = () => {
                 name="password"
                 placeholder="Password"
                 required
-                className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#f84525] focus:ring-2 focus:ring-[#ff006c] transition duration-200"
+                className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
               />
               {formik.touched.password && formik.errors.password ? (
-                <div style={{ color: "red" }}>{formik.errors.password}</div>
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.password}
+                </div>
               ) : null}
             </div>
           </div>
 
-          <div className="flex flex-col    justify-end mt-4">
-            <p className="mt-2 text-center text-sm leading-5 text-gray-500 max-w mb-3">
-              Already have an account?
+          <div className="flex flex-col justify-end mt-4">
+            <p className="mt-2 text-center text-sm text-gray-500 mb-3">
+              Don't have an account?
               <span
                 onClick={() => navigate("/register")}
                 className="pl-2 cursor-pointer font-medium text-rose-500 hover:text-rose-600 focus:outline-none focus:underline transition ease-in-out duration-150"
               >
                 Sign Up
-              </span>{" "}
+              </span>
             </p>
             <button
               type="submit"
-              className="p-4 text-white hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-[#ff006c]"
+              className="p-3 text-white w-full hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm bg-[#ff006c] transition duration-200"
             >
               SIGN IN
             </button>

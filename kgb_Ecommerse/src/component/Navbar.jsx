@@ -12,6 +12,7 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const [currency, setCurrency] = useState("");
   const { token } = useSelector((state) => state.auth);
+  const {items} = useSelector(state=>state.cart);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -76,7 +77,7 @@ const Navbar = () => {
               Blog
             </Link>
           </li>
-          <li>
+          <li className="relative">
             <Link
               to="/cart"
               className={`hover:text-rose-900 transition-colors duration-200 ${
@@ -85,6 +86,9 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               <FaCartPlus size={24} />
+              <span className={`absolute -top-2 -right-2 hover:bg-rose-900 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center ${pathname === "/cart"? "bg-[#ff006c]":"bg-[#fa7fab]"}`}>
+                {items.length || 0}
+              </span>
             </Link>
           </li>
           {token ? (
