@@ -31,14 +31,14 @@ const ProductPage = () => {
       <div className="flex flex-wrap gap-5 justify-center items-center">
         {products &&
           products.length > 0 &&
-          products.slice(pageIndex * 5, (pageIndex * 5) + 5).map((product) => (
-            <ProductCard key={product.id} product={product} />
+          products.slice(pageIndex * 10, (pageIndex * 10) + 10).map((product) => (
+            <ProductCard key={product._id} product={product} />
           ))}
       </div>
 
       <div className="flex justify-center pr-5">
         <Pagination
-          pageCount={products.length / 5}
+          pageCount={products.length / 10}
           gotoPage={gotoPage}
           pageIndex={pageIndex}
         />

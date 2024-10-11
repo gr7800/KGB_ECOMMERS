@@ -11,14 +11,14 @@ import {
 } from "../../utils/helper";
 
 const ProductCard = ({ product }) => {
-  const { id, image, price, rating, title } = product;
+  const { _id, url, price, totalRating, name } = product;
 
   const { items } = useSelector((state) => state.cart);
   const { exchangeRate, currentCurrency } = useSelector(
     (state) => state.currency
   );
 
-  const { isInCart } = useCheckIsInCart(id, items);
+  const { isInCart } = useCheckIsInCart(_id, items);
 
   const convertedPrice = convertingPriceHandler(price, exchangeRate);
   const currencySymbol = currencySymbolHandler(currentCurrency);
@@ -36,13 +36,13 @@ const ProductCard = ({ product }) => {
 
   return (
     <>
-      {id && (
+      {_id && (
         <div className="flex flex-col justify-between bg-rose-300 w-64 relative font-serif p-4 rounded cursor-pointer hover:bg-[#fef4f2] max-sm:bg-[#fef4f2] transition shadow-2xl h-[30rem] max-h-auto">
-          <Link to={`/products/${id}`}>
+          <Link to={`/products/${_id}`}>
             <div className="w-56 h-auto bg-white p-4 flex items-center justify-center">
               <img
-                src={image}
-                alt={title}
+                src={url}
+                alt={name}
                 className="w-min-56 h-56 object-contain shadow-sm"
               />
             </div>
@@ -50,14 +50,14 @@ const ProductCard = ({ product }) => {
             <div className="flex justify-between gap-4 py-3 ">
               <div>
                 <p className="text-rose-900 text-lg font-bold">
-                  {title.split(" ").slice(0, 5).join(" ")}
+                  {name.length > 4 && name.split(" ").slice(0, 5).join(" ")}
                 </p>
               </div>
             </div>
 
             <div className="flex gap-1 items-center justify-start pb-2">
-              {rating &&
-                Array(Math.round(rating?.rate))
+              {totalRating &&
+                Array(Math.round(totalRating))
                   .fill(0)
                   .map((star, index) => (
                     <FaStar key={index} className="text-rose-900" />
