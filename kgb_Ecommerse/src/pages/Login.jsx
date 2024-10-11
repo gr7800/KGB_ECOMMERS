@@ -43,11 +43,16 @@ const Login = () => {
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
         setIsEmailValid("")
-        let user = await doSignInWithEmailIdAndPassword(
-          values.email,
-          values.password
-        );
-        dispatch(signIn(user?._tokenResponse.idToken || ""))
+        let result =  dispatch(signIn(values))
+        if(result.payload && result.payload.message === "Login Successful"){
+          navigate("/")
+        }
+        else{
+          toast.error(result.payload.message, {
+            position: "top-center",
+            autoClose: 3000,
+          });
+        }
       } catch (err) {
 
         switch (err.code) {

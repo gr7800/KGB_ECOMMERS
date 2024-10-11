@@ -2,37 +2,48 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
-import {  doSignOut } from "../../firebase";
-import { updateProfile } from "firebase/auth";
+import axios from "axios";
 
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
-  async ({userCredentials, values}) => {
-    const user = userCredentials.user;
-    await updateProfile(user, {
-      displayName: values.username,
-    });
-
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      username: values.username,
-      email: values.email,
-      name: values.name,
-    });
-    localStorage.setItem(
-      "token",
-      userCredentials?._tokenResponse.idToken || ""
-    );
-    return userCredentials?._tokenResponse.idToken || ""
+  async ({ values }, { rejectWithValue }) => {
+    try {
+      let requestObj = {
+        "firstname": values.firstName,
+        "lastname": values.lastName,
+        "gender": values.gender,
+        "email": values.email,
+        "password": values.password,
+        "role": "user"
+      }
+      let response = await axios.post("https://ecommerce-api-8ga2.onrender.com/api/user/register", requestObj)
+      return response.data
+    }
+    catch (error) {
+      console.log(error, 'errro')
+      rejectWithValue(error.response.data)
+    }
   }
 );
 
 export const signIn = createAsyncThunk(
   "auth/signIn",
-  async (token) => {
-    localStorage.setItem("token", token||"");
-    return token || ""
+  async (values) => {
+    try {
+      let requestObj = {
+        "email": values.email,
+        "password": values.password,
+        "role": "user"
+      }
+
+      let response = await axios.post("https://ecommerce-api-8ga2.onrender.com/api/user/login", requestObj, { withCredentials: true })
+      return response.data|| {}
+    }
+    catch (error) {
+      console.log(error, 'errro')
+      rejectWithValue(error.response.data)
+    }
   }
 );
 
@@ -46,7 +57,7 @@ export const userData = createAsyncThunk(
       const docRef = doc(db, "users", decodedToken.user_id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        return { id: docSnap.id, ...docSnap.data() } 
+        return { id: docSnap.id, ...docSnap.data() }
       } else {
         return {}
       }
@@ -59,8 +70,7 @@ export const userData = createAsyncThunk(
 );
 
 export const logOut = createAsyncThunk("auth/logOut", async () => {
-  localStorage.removeItem("token");
-  await doSignOut();
+  return ""
 });
 
 const authSlice = createSlice({
@@ -68,7 +78,7 @@ const authSlice = createSlice({
   initialState: {
     isLoading: false,
     error: null,
-    token: localStorage.getItem("token") || "",
+    token: false,
     user: {}
   },
   reducers: {},
@@ -79,7 +89,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signUp.fulfilled, (state, action) => {
-        state.token = action.payload;
+        state.token = false;
         state.isLoading = false;
       })
       .addCase(signUp.rejected, (state, action) => {
@@ -92,7 +102,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.token = action.payload;
+        let user = action.payload?.user || {}
+        state.token = true;
+        state.user = user
         state.isLoading = false;
       })
       .addCase(signIn.rejected, (state, action) => {
@@ -104,8 +116,8 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user = null;
-        state.token = "";
+        state.user = {};
+        state.token = false;
         state.isLoading = false;
       })
       .addCase(logOut.rejected, (state, action) => {
