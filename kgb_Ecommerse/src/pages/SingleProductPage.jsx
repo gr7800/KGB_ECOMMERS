@@ -18,10 +18,10 @@ const SingleProductPage = () => {
     (state) => state.currency
   );
 
-  const { isInCart } = useCheckIsInCart(productId,items);
-  
+  const { isInCart } = useCheckIsInCart(productId, items);
+
   const { _id, name, brand, category, url, description, price, ratings, inStock, inventory, totalRating } = singleProduct || {}
-  
+
   const convertedPrice = convertingPriceHandler(price, exchangeRate);
   const currencySymbol = currencySymbolHandler(currentCurrency);
 
@@ -39,7 +39,7 @@ const SingleProductPage = () => {
   useEffect(() => {
     dispatch(fetchProductById(productId))
   }, [])
-  
+
 
   return (
     <>
@@ -73,23 +73,27 @@ const SingleProductPage = () => {
                   <p className="text-sm font-extralight">Tax Included</p>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <div>
-                    {
-                      isInCart ? (
-                        <RemoveFromCartButton
-                          large
-                          onClick={onDeleteButtonClickHandler}
-                        />
-                      ) : (
-                        <AddToCartButton
-                          large
-                          onClick={onAddButtonClickHandler}
-                        />
-                      )}
+                {
+                  inStock && (
+                    <div className="flex flex-col gap-2">
+                      <div>
+                        {
+                          isInCart ? (
+                            <RemoveFromCartButton
+                              large
+                              onClick={onDeleteButtonClickHandler}
+                            />
+                          ) : (
+                            <AddToCartButton
+                              large
+                              onClick={onAddButtonClickHandler}
+                            />
+                          )}
 
-                  </div>
-                </div>
+                      </div>
+                    </div>
+                  )
+                }
 
                 <div className="mt-2">
                   <p>{description}</p>
@@ -97,16 +101,16 @@ const SingleProductPage = () => {
 
                 <div>
                   <RWebShare
-              data={{
-                text: "Shop Now on KGB",
-                url: "http://booklet-c1aa8.web.app/products/" + _id,
-                title: name
-              }}
-            >
-              <div className="flex gap-3 items-center cursor-pointer">
-              <FaShareAlt className="text-rose-900" /> Share
-              </div>
-            </RWebShare>
+                    data={{
+                      text: "Shop Now on KGB",
+                      url: "http://booklet-c1aa8.web.app/products/" + _id,
+                      title: name
+                    }}
+                  >
+                    <div className="flex gap-3 items-center cursor-pointer">
+                      <FaShareAlt className="text-rose-900" /> Share
+                    </div>
+                  </RWebShare>
                 </div>
               </div>
             </div>

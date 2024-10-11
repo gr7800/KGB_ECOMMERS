@@ -1,5 +1,4 @@
 export const BaseUrlProduct = "https://ecommerce-api-8ga2.onrender.com";
-// export const ProductApi = "https://ecommerce-api-8ga2.onrender.com/api/product";
 export const BaseBlogUrl = "https://jsonplaceholder.typicode.com/posts";
 export const CurrencyExchangeUrl = "https://anyapi.io/api/v1/exchange/convert";
 export const ApiKey = "5lritc716i8lsi4e5sshoglab18kcaf7gr24kbejm508e1hpo17pt6g";
