@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaCartPlus } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { OptionOfCarrencyExchange } from "../utils/constant";
+import { optionOfCurrencyExchange } from "../utils/constant";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -44,7 +44,7 @@ const Navbar = () => {
               onChange={(e) => setCurrency(e.target.value)}
               value={currency}
             >
-              {OptionOfCarrencyExchange.map((item, index) => (
+              {optionOfCurrencyExchange.map((item, index) => (
                 <option
                   key={index}
                   value={item.value}
