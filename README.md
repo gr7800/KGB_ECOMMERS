@@ -78,6 +78,30 @@ react-icons
 
 
 
+addtocart response 
+{
+  "_id": "6708ccc1662e8b1bfe80b32d",
+  "user": "6708cc0220c2f2ee832f54d0",
+  "items": [
+    {
+      "product": {
+        "_id": "66f18c7e3ebaaeac81783c2f",
+        "name": "Smartphone Stand",
+        "price": 15.99,
+        "image": "https://res.cloudinary.com/ddadanczt/image/upload/v1727423160/ecommerce/A2524011-Anker_313_Wireless_Charger_Stand_5_vsisee.png"
+      },
+      "quantity": 1,
+      "attributes": {
+        "color": "red",
+        "size": "M"
+      },
+      "subtotal": 15.99
+    }
+  ],
+  "total": 15.99,
+  "createdAt": "2024-10-11T06:59:13.470Z",
+  "updatedAt": "2024-10-11T06:59:13.499Z"
+}
 
 
 

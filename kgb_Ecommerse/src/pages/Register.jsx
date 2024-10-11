@@ -17,14 +17,17 @@ const Register = () => {
   const formik = useFormik({
     initialValues: {
       username: "",
-      name: "",
+      firstName: "",
+      lastName:"",
       email: "",
       password: "",
       confirmPassword: "",
+      gender:""
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Username is required"),
-      name: Yup.string().required("Name is required"),
+      firstName: Yup.string().required("Name is required"),
+      lastName: Yup.string().required("Name is required"),
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
@@ -34,21 +37,16 @@ const Register = () => {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Confirm Password is required"),
+        gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
-        const userCredentials = await doCreateUserWithEmailIdAndPassword(
-          values.email,
-          values.password
-        );
+        const result = dispatch(signUp({  values }));
+        if(result.payload && result.payload.message == "success"){
+          navigate("/login")
+        }
+        else{
 
-        dispatch(signUp({ userCredentials, values }));
-      } catch (err) {
-        if (err.code === "auth/email-already-in-use") {
-          setErrors({
-            email: "This email is already registered. Please try logging in.",
-          });
-        } else {
           toast('Something went wrong. Please try again later.', {
             position: "top-center",
             autoClose: 3000,
@@ -60,6 +58,17 @@ const Register = () => {
             theme: "light", 
             });
         }
+      } catch (err) {
+          toast('Something went wrong. Please try again later.', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light", 
+            });
       } finally {
         setSubmitting(false);
       }
@@ -96,21 +105,79 @@ const Register = () => {
                 htmlFor="name"
                 className="block text-sm font-medium text-[#fa7fab]"
               >
-                Name
+               First Name
               </label>
               <input
                 onChange={formik.handleChange}
-                value={formik.values.name}
-                id="name"
-                name="name"
-                placeholder="John Doe"
+                value={formik.values.firstName}
+                id="firstName"
+                name="firstName"
+                placeholder="John"
                 type="text"
                 required
                 className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
               />
-              {formik.touched.name && formik.errors.name ? (
+              {formik.touched.firstName && formik.errors.firstName ? (
                 <div className="text-red-500 text-sm mt-1">
-                  {formik.errors.name}
+                  {formik.errors.firstName}
+                </div>
+              ) : null}
+            </div>
+            <div className="mt-6">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-[#fa7fab]"
+              >
+                Last Name
+              </label>
+              <input
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
+                id="lastName"
+                name='lastName'
+                placeholder="Doe"
+                type="text"
+                required
+                className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
+              />
+              {formik.touched.lastName && formik.errors.lastName ? (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.lastName}
+                </div>
+              ) : null}
+            </div>
+
+            <div className="mt-6">
+              <label className="block text-sm font-medium text-[#fa7fab] mb-2">
+                Gender
+              </label>
+              <div className="flex items-center">
+                <label className="mr-4 text-rose-500">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    onChange={formik.handleChange}
+                    checked={formik.values.gender === "male"}
+                    className="mr-1"
+                  />
+                  Male
+                </label>
+                <label className="text-rose-500">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    onChange={formik.handleChange}
+                    checked={formik.values.gender === "female"}
+                    className="mr-1"
+                  />
+                  Female
+                </label>
+              </div>
+              {formik.touched.gender && formik.errors.gender ? (
+                <div className="text-red-500 text-sm mt-1">
+                  {formik.errors.gender}
                 </div>
               ) : null}
             </div>
@@ -176,6 +243,7 @@ const Register = () => {
                 id="password"
                 name="password"
                 type="password"
+                placeholder="password"
                 required
                 className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
               />
@@ -199,6 +267,7 @@ const Register = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
+                placeholder="confirm password"
                 required
                 className="w-full rounded-md py-2.5 px-4 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#ff006c] transition duration-150 ease-in-out sm:text-sm"
               />
