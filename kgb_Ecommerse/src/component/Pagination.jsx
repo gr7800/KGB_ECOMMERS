@@ -1,16 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Button2({ content, onClick, active, disabled }) {
   return (
     <button
-      className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-[0_4px_10px_rgba(0,0,0,0.03)] text-lg font-normal transition-colors rounded-lg
-      ${active ? "bg-rose-500 text-white" : "text-[#ff006c]"}
-      ${
-        !disabled
-          ? "bg-white hover:bg-rose-500 hover:text-white"
-          : "text-rose-200 bg-white cursor-not-allowed"
-      }
+      className={`flex flex-col cursor-pointer items-center justify-center w-9 h-9 shadow-sm text-lg font-normal transition-colors rounded-lg
+      ${disabled && "text-rose-200 bg-gray-200 cursor-not-allowed"}
+      ${active ? "bg-rose-500 text-white":"text-rose-500 bg-rose-200"}
       `}
       onClick={onClick}
       disabled={disabled}
@@ -57,13 +53,13 @@ function PaginationNav1({
     ));
   }, [pageCount, pageIndex]);
   return (
-    <ul className="flex gap-2">
+    <ul className="flex gap-2 items-center justify-center">
       <li>
         <Button2
           content={
             <div className="flex ml-1">
-              <FaChevronLeft size="0.7rem" />
-              <FaChevronLeft size="0.7rem" className="-translate-x-1/2" />
+              <FaChevronLeft size="0.8rem" />
+              <FaChevronLeft size="0.8rem" className="-translate-x-1/2" />
             </div>
           }
           onClick={() => gotoPage(pageIndex - 1)}
@@ -75,8 +71,8 @@ function PaginationNav1({
         <Button2
           content={
             <div className="flex ml-1">
-              <FaChevronRight size="0.6rem" />
-              <FaChevronRight size="0.6rem" className="-translate-x-1/2" />
+              <FaChevronRight size="0.8rem" />
+              <FaChevronRight size="0.8rem" className="-translate-x-1/2" />
             </div>
           }
           onClick={() => gotoPage(pageIndex + 1)}
@@ -89,7 +85,7 @@ function PaginationNav1({
 
 function Pagination({ pageCount, gotoPage, pageIndex }) {
   return (
-    <div className="flex gap-3 flex-wrap p-6 py-12">
+    <div className="flex gap-4 flex-wrap p-6 py-8 items-center justify-center">
       <PaginationNav1
         gotoPage={gotoPage}
         canPreviousPage={pageIndex > 0}

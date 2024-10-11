@@ -1,28 +1,22 @@
-import { useEffect, useState } from "react";
-import { Link, useLocation} from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaCartPlus } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { optionOfCurrencyExchange } from "../utils/constant";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchExchangeRate, selectCurrency } from "../redux/slices/currencySlice";
-
+import { OptionOfCarrencyExchange } from "../utils/constant";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
-  const { currentCurrency } = useSelector((state) => state.currency);
-
-  const dispatch = useDispatch();
+  const [currency, setCurrency] = useState("");
+  const { token } = useSelector((state) => state.auth);
+  const {items} = useSelector(state=>state.cart);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
-  useEffect(() => {
-    dispatch(fetchExchangeRate(currentCurrency))
-  }, [dispatch, currentCurrency])
 
   return (
     <div className="w-full bg-[#fae9e6] flex justify-between items-center px-10 py-3 shadow-md fixed top-0 z-20 text-[#fa7fab] font-semibold">
@@ -46,11 +40,10 @@ const Navbar = () => {
           <li>
             <select
               name="currency"
-              className="bg-transparent text-[#fa7fab] outline-none cursor-pointer  py-1 rounded-md border-2 border-rose-900 p-2 hover:bg-[#fa7fab] hover:text-[#fae9e6] transition-colors duration-200"
-              onChange={(e) => dispatch(selectCurrency(e.target.value))}
-              value={currentCurrency}
+              className="bg-transparent text-[#fa7fab] outline-none cursor-pointer  py-1 rounded-md hover:bg-[#fa7fab] hover:text-[#fae9e6] transition-colors duration-200"
+              onChange={(e) => setCurrency(e.target.value)}
+              value={currency}
             >
-
               {OptionOfCarrencyExchange.map((item, index) => (
                 <option
                   key={index}
@@ -84,7 +77,7 @@ const Navbar = () => {
               Blog
             </Link>
           </li>
-          <li>
+          <li className="relative">
             <Link
               to="/cart"
               className={`hover:text-rose-900 transition-colors duration-200 ${
@@ -93,6 +86,9 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               <FaCartPlus size={24} />
+              <span className={`absolute -top-2 -right-2 hover:bg-rose-900 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center ${pathname === "/cart"? "bg-[#ff006c]":"bg-[#fa7fab]"}`}>
+                {items.length || 0}
+              </span>
             </Link>
           </li>
           {token ? (
