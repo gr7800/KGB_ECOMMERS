@@ -1,10 +1,18 @@
 import React from 'react';
 import { RemoveFromCartButton } from '../Buttons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, updateItemQuantity } from '../../redux/slices/cartSlice';
+import { convertingPriceHandler, currencySymbolHandler } from '../../utils/helper';
 
 const CartCard = ({ cartItem }) => {
   const { id, title, image, price, quantity } = cartItem;
+  const { exchangeRate, currentCurrency } = useSelector(
+    (state) => state.currency
+  );
+
+  const convertedPrice = convertingPriceHandler(price, exchangeRate);
+  const currencySymbol = currencySymbolHandler(currentCurrency);
+
   const dispatch = useDispatch();
 
   const onDeleteButtonClickHandler = () => {
@@ -32,7 +40,7 @@ const CartCard = ({ cartItem }) => {
           <p className="text-sm text-rose-900 font-bold max-sm:text-xs">
             {`${title.split(' ').slice(0, 5).join(' ')}${title.split(' ').length > 5 ? '...' : ''}`}
           </p>
-          <p>₹{price}</p>
+          <p>{currencySymbol} {convertedPrice}</p>
         </div>
       </div>
 

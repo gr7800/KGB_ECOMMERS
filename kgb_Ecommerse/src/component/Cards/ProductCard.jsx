@@ -32,6 +32,7 @@ const ProductCard = ({ product }) => {
   const onDeleteButtonClickHandler = () => {
     dispatch(removeItem(product));
   };
+  
 
   return (
     <>
