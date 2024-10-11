@@ -8,10 +8,34 @@ body {
 }
 
 .carousel-control {
-  background-color: rgba(255, 105, 180, 0.8); 
+  background-color: rgba(255, 105, 180, 0.8);
   transition: background-color 0.3s;
 }
 
 .carousel-control:hover {
-  background-color: rgba(255, 105, 180, 1); 
+  background-color: rgba(255, 105, 180, 1);
+}
+
+.Toastify__toast {
+  background: pink;
+  color: #880e4f;
+}
+
+.Toastify__toast--success {
+  background: rgb(255, 241, 244);
+  color: #60b02f;
+}
+
+.Toastify__toast--error {
+  color: red;
+  background: rgb(255, 241, 244);
+}
+
+.Toastify__toast--info {
+  background: #db7093;
+}
+
+.Toastify__toast--warning {
+  color: #f1c438;
+  background: rgb(255, 241, 244);
 }
