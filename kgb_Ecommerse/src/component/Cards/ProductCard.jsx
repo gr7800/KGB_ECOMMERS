@@ -1,32 +1,37 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { AddToCartButton, RemoveFromCartButton } from "../Buttons";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../../redux/slices/cartSlice";
 import useCheckIsInCart from "../../hooks/useCheckIsInCart";
+import {
+  convertingPriceHandler,
+  currencySymbolHandler,
+} from "../../utils/helper";
 
 const ProductCard = ({ product }) => {
-  const {
-    id,
-    image,
-    price,
-    rating,
-    title,
-  } = product
-  
+  const { id, image, price, rating, title } = product;
+
   const { items } = useSelector((state) => state.cart);
- const {isInCart} =  useCheckIsInCart(id,items)
+  const { exchangeRate, currentCurrency } = useSelector(
+    (state) => state.currency
+  );
+
+  const { isInCart } = useCheckIsInCart(id, items);
+
+  const convertedPrice = convertingPriceHandler(price, exchangeRate);
+  const currencySymbol = currencySymbolHandler(currentCurrency);
 
   const dispatch = useDispatch();
 
   const onAddButtonClickHandler = () => {
-    dispatch(addItem(product))
-  }
+    dispatch(addItem(product));
+  };
 
   const onDeleteButtonClickHandler = () => {
-    dispatch(removeItem(product))
-  }
+    dispatch(removeItem(product));
+  };
 
   return (
     <>
@@ -50,23 +55,27 @@ const ProductCard = ({ product }) => {
             </div>
 
             <div className="flex gap-1 items-center justify-start pb-2">
-              {rating && Array(Math.round(rating?.rate)).fill(0).map((star, index) => (
-                <FaStar key={index} className="text-rose-900" />
-              ))}
+              {rating &&
+                Array(Math.round(rating?.rate))
+                  .fill(0)
+                  .map((star, index) => (
+                    <FaStar key={index} className="text-rose-900" />
+                  ))}
             </div>
 
             <div className="flex items-center justify-between mb-3">
-              <p className="">₹ {price}</p>
+              <p>
+                {currencySymbol} {convertedPrice}
+              </p>
             </div>
           </Link>
 
-          {
-            isInCart ? <RemoveFromCartButton onClick={onDeleteButtonClickHandler} /> : <AddToCartButton onClick={onAddButtonClickHandler} />
-          }
-
-
+          {isInCart ? (
+            <RemoveFromCartButton onClick={onDeleteButtonClickHandler} />
+          ) : (
+            <AddToCartButton onClick={onAddButtonClickHandler} />
+          )}
         </div>
-
       )}
     </>
   );
