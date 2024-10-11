@@ -6,6 +6,10 @@ import LoadingScreen from "./LoadingScreen";
 const CategoryProducts = ({ heading, categoryName }) => {
   const { items } = useCategoriesWiseData(categoryName);
 
+  if(items.length<=3){
+    return ;
+  }
+
   if (items.length == 0) {
     return <LoadingScreen />;
   }

@@ -10,6 +10,7 @@ import {
 } from "../../utils/helper";
 
 const ProductCard = ({ product }) => {
+  console.log(product);
   const { _id, url, price, totalRating, name } = product;
 
   const { items } = useSelector((state) => state.cart);
@@ -19,8 +20,8 @@ const ProductCard = ({ product }) => {
 
   const { isInCart } = useCheckIsInCart(_id, items);
 
-  const convertedPrice = convertingPriceHandler(price, exchangeRate);
-  const currencySymbol = currencySymbolHandler(currentCurrency);
+  const convertedPrice = convertingPriceHandler(price, exchangeRate) || price;
+  const currencySymbol = currencySymbolHandler(currentCurrency)||"₹";
 
   const dispatch = useDispatch();
 

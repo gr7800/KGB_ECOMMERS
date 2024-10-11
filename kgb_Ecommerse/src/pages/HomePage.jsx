@@ -34,9 +34,9 @@ const HomePage = () => {
             category.length > 0 &&
             category.map((categ, index) => (
               <CategoryProducts
-                key={categ + index}
-                heading={categ.toUpperCase()}
-                categoryName={categ}
+                key={categ.count + categ.category}
+                heading={categ.category.toUpperCase()}
+                categoryName={categ.category}
               />
             ))}
         </div>

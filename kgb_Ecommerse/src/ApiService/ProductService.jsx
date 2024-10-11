@@ -12,6 +12,8 @@ export const fetchProductByIdApi = async (id) => {
 };
 
 export const fetchAllProductCategories = async () => {
-  const response = await axios.get(`${BaseUrlProduct}/categories`);
+  const response = await axios.get(
+    `${BaseUrlProduct}/api/product/categories/All`
+  );
   return response.data;
 };
