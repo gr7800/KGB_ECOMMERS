@@ -8,13 +8,21 @@ import { AddToCartButton, RemoveFromCartButton } from "../component/Buttons";
 import { addItem, removeItem } from "../redux/slices/cartSlice";
 import useCheckIsInCart from "../hooks/useCheckIsInCart";
 import { RWebShare } from "react-web-share";
+import { convertingPriceHandler, currencySymbolHandler } from "../utils/helper";
 
 const SingleProductPage = () => {
   const { productId } = useParams();
   const { singleProduct, isLoading } = useSelector((state) => state.product);
   const { items } = useSelector((state) => state.cart)
   const { id, title, category, image, description, price, rating } = singleProduct || {}
-  const { isInCart } = useCheckIsInCart(productId,items)
+  const { isInCart } = useCheckIsInCart(productId,items);
+  const { exchangeRate, currentCurrency } = useSelector(
+    (state) => state.currency
+  );
+
+  const convertedPrice = convertingPriceHandler(price, exchangeRate);
+  const currencySymbol = currencySymbolHandler(currentCurrency);
+
 
   const dispatch = useDispatch();
 
@@ -58,7 +66,7 @@ const SingleProductPage = () => {
 
                 <div>
                   <div className="text-xl font-julius font-extrabold flex items-center gap-2">
-                    <p>₹ {price}</p>
+                    <p>{currencySymbol} {convertedPrice}</p>
                   </div>
                   <p className="text-sm font-extralight">Tax Included</p>
                 </div>

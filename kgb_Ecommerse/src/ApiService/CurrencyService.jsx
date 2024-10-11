@@ -5,5 +5,6 @@ export const fetchExchangeRateApi = async (currentCurrency) => {
   const response = await axios.get(
     `${CurrencyExchangeUrl}?base=USD&to=${currentCurrency}&amount=1&apiKey=${ApiKey}`
   );
+  
   return response.data;
 };
