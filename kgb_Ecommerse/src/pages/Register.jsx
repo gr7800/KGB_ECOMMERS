@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { signUp } from "../redux/slices/authSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -45,7 +47,16 @@ const Register = () => {
             email: "This email is already registered. Please try logging in.",
           });
         } else {
-          alert("Something went wrong. Please try again later.");
+          toast('Something went wrong. Please try again later.', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light", 
+            });
         }
       } finally {
         setSubmitting(false);

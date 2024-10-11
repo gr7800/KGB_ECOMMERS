@@ -5,6 +5,8 @@ import { logOut, userData } from '../redux/slices/authSlice';
 import defaultProfile from "../assets/DefaultProfile.jpg";
 import { auth } from '../firebaseConfig';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -16,7 +18,16 @@ const Profile = () => {
 
   async function ResetPassword(){
     await sendPasswordResetEmail(auth, user.email);
-
+    toast('✉️ Reset link is sent to your email', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light", 
+      });
   }
 
   function handleLogout(){
@@ -27,6 +38,7 @@ const Profile = () => {
   
   return (
     <div className="w-full  flex  justify-center bg-pink-100 text-rose-900 py-10 px-10">
+      <ToastContainer />
       <div className="rounded-lg shadow-lg shadow-rose-900 p-8 max-w-sm w-full text-center my-auto bg-rose-300">
         <img
           src={defaultProfile}

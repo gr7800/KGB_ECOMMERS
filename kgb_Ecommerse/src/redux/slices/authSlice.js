@@ -3,6 +3,7 @@ import { db } from "../../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import {  doSignOut } from "../../firebase";
+import { updateProfile } from "firebase/auth";
 
 
 export const signUp = createAsyncThunk(

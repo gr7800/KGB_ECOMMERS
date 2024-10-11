@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { signIn } from "../redux/slices/authSlice";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -82,6 +84,16 @@ const Login = () => {
   async function handleForgotPassword() {
     if (validateEmail(formik.values.email)) {
       await sendPasswordResetEmail(auth, formik.values.email);
+      toast('✉️ Reset link is sent to your email', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light", 
+        });
     }
     else{
       setIsEmailValid("Invalid email address")
@@ -90,6 +102,7 @@ const Login = () => {
 
   return (
     <div className="font-sans text-[#fa7fab] antialiased bg-[#fae9e6] min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+      <ToastContainer />
       <div>
         <h2 className="font-bold text-[#ff006c] text-3xl">
           <span className="bg-[#ff006c] text-white px-2 rounded-md">KGB</span>{" "}

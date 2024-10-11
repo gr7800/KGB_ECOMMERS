@@ -6,6 +6,9 @@ import { db } from "../firebaseConfig";
 import { useEffect } from "react";
 import { userData } from "../redux/slices/authSlice";
 import { jwtDecode } from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -42,29 +45,55 @@ const ContactUs = () => {
           message: values.message,
         });
 
-        alert("Feedback submitted successfully!");
+        toast("Feedback submitted successfully!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } catch (err) {
         if (err.code) {
+          let errorMessage = ""
           switch (err.code) {
             case "permission-denied":
-              alert(
-                "An error occurred while submitting your feedback. Please try again."
-              );
+                errorMessage= "An error occurred while submitting your feedback. Please try again."
+            
               break;
             case "unavailable":
-              alert(
-                "An error occurred while submitting your feedback. Please try again."
-              );
+              errorMessage= "An error occurred while submitting your feedback. Please try again."
+             
               break;
             default:
-              alert(
-                "An error occurred while submitting your feedback. Please try again."
-              );
+              errorMessage= "An error occurred while submitting your feedback. Please try again."
+  
+          }
+          if (errorMessage) {
+            toast(errorMessage, {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
           }
         } else {
-          alert(
-            "An error occurred while submitting your feedback. Please try again."
-          );
+          toast("An error occurred while submitting your feedback. Please try again.", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       }
     },
@@ -76,6 +105,7 @@ const ContactUs = () => {
 
   return (
     <div className="bg-light-pink-1 font-[sans-serif] lg:h-screen">
+      <ToastContainer />
       <div className="grid lg:grid-cols-3 items-center max-lg:justify-center gap-6 h-full sm:p-12 p-8 max-sm:p-4">
         <div className="max-w-lg max-lg:mx-auto max-lg:text-center max-lg:mb-6">
           <h2 className="text-4xl font-extrabold text-gray-800">Contact Us</h2>
