@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { AddToCartButton, RemoveFromCartButton } from "../Buttons";
 import { FaStar } from "react-icons/fa";
@@ -32,7 +31,6 @@ const ProductCard = ({ product }) => {
   const onDeleteButtonClickHandler = () => {
     dispatch(removeItem(product));
   };
-  
 
   return (
     <>

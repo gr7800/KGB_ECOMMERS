@@ -65,7 +65,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/products"
+              to="/products?page=1"
               className={`hover:underline hover:text-rose-900 transition-colors duration-200 ${
                 pathname === "/products" && "text-[#ff006c]"
               }`}
