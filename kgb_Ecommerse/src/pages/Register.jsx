@@ -3,14 +3,16 @@ import { doCreateUserWithEmailIdAndPassword } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../redux/slices/authSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingScreen from "../component/LoadingScreen";
 
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {isLoading} = useSelector(state=>state.auth);
 
   const formik = useFormik({
     initialValues: {
@@ -64,8 +66,13 @@ const Register = () => {
     },
   });
 
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="min-h-screen bg-[#fae9e6] flex flex-col justify-center py-6 sm:px-6 lg:px-8">
+      <ToastContainer/>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-[#ff006c]">
           Create a new account

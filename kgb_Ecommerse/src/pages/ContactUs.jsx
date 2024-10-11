@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup"; // for schema validation
 import { db } from "../firebaseConfig";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { userData } from "../redux/slices/authSlice";
 import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingScreen from "../component/LoadingScreen";
 
 
 const validationSchema = Yup.object({
@@ -23,7 +24,8 @@ const validationSchema = Yup.object({
     .required("Message is required"),
 });
 
-const ContactUs = () => {
+const ContactUs = () => { 
+  const [loading,setLoading] = useState(false)
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const contactForm = useFormik({
@@ -36,6 +38,7 @@ const ContactUs = () => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const decodedToken = jwtDecode(token);
         await setDoc(doc(db, "feedback", Date.now().toString()), {
           uid: decodedToken.user_id,
@@ -55,7 +58,9 @@ const ContactUs = () => {
           progress: undefined,
           theme: "light",
         });
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         if (err.code) {
           let errorMessage = ""
           switch (err.code) {
@@ -102,6 +107,10 @@ const ContactUs = () => {
   useEffect(() => {
     dispatch(userData(token));
   }, []);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="bg-light-pink-1 font-[sans-serif] lg:h-screen">

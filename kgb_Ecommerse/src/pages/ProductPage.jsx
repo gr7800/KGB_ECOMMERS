@@ -5,11 +5,16 @@ import { fetchProducts } from "../redux/slices/productSlice";
 import Pagination from "../component/Pagination";
 import LoadingScreen from "../component/LoadingScreen";
 import OutOfStockProductCard from "../component/Cards/OutOfStockProductCard";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductPage = () => {
   const { products, isLoading, error } = useSelector((state) => state.product);
-  const [pageIndex, setPageIndex] = useState(0);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const page = parseInt(queryParams.get("page")) || 1;
+  const [pageIndex, setPageIndex] = useState(page - 1 || 0);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -17,7 +22,13 @@ const ProductPage = () => {
 
   function gotoPage(currePageIndex) {
     setPageIndex(currePageIndex);
+    queryParams.set("page", currePageIndex+1);
+    navigate(`${location.pathname}?${queryParams.toString()}`);
   }
+
+  useEffect(() => {
+    setPageIndex(page - 1);
+  }, [page]);
 
   if (isLoading) {
     return <LoadingScreen />;
