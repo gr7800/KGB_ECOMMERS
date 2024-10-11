@@ -3,12 +3,13 @@ import { doSignInWithEmailIdAndPassword } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup"; // for schema validation
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../redux/slices/authSlice";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingScreen from "../component/LoadingScreen";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -28,7 +29,7 @@ const validateEmail = (email) => {
 };
 
 const Login = () => {
-
+  const {isLoading} = useSelector((state)=>state.auth)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isEmailValid, setIsEmailValid] = useState("")
@@ -99,6 +100,11 @@ const Login = () => {
       setIsEmailValid("Invalid email address")
     }
   }
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
 
   return (
     <div className="font-sans text-[#fa7fab] antialiased bg-[#fae9e6] min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
